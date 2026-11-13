@@ -274,7 +274,7 @@ const CAST={
  tere:{name:"てれボン",type:"照れ屋であわてんぼう",col:"var(--c-tere)",ff:["オムライス"],fg:["はな"],hate:[],weak:"じろじろ見られること",
   happy:["えっ、私に？","て、照れるよぉ"],bad:["ボン！？あわわ…！","ど、どうしよう…ボン！？"],idle:["あわわ…","ちらっ…","ど、どうも","私なんか、いいのかな…"],worry:["うまく話せないの","顔が赤くなっちゃう"],upset:"scared"},
  rain:{name:"にじボン",type:"にじ色のムードメーカー",col:"var(--c-rain)",ff:["ペロペロキャンディ"],fg:ALLG,hate:[],weak:"雨がふり続くこと",
-  happy:["我輩、大満足なのだぞ！","きらきらー！"],bad:["うむ…我輩は平気なのだぞ","あはは、だいじょうぶだ"],idle:["我輩の虹を見たか？","わーい！","ぱあっ！","我輩にまかせるのだ！"],worry:["もっとみんなと遊びたい","我輩の虹をもっと大きくしたい"],upset:"scared"}
+  happy:["我輩、大満足である！","きらきらー！"],bad:["うむ…我輩は平気である","あはは、だいじょうぶだ"],idle:["我輩の虹を見たか？","わーい！","ぱあっ！","我輩にまかせるのである！"],worry:["もっとみんなと遊びたい","我輩の虹をもっと大きくしたい"],upset:"scared"}
 };
 const START=["oko","niko","hyoe"];
 const IDLE_ADD={oko:"管理人さん、まだ？ アタシ待ってるんだけど",niko:"管理人さん、わたしを見て！",hyoe:"管理人さん、ボンのそばにいてね",mogu:"管理人さん、おにぎり〜",nemu:"管理人さん…僕、ねむい",tere:"か、管理人さん…",rain:"管理人よ、我輩の虹を見よ！"};
@@ -792,15 +792,15 @@ function rainLeave(){
   S.rainLeft=S.day;S.rainWarn=false;
   const el=document.getElementById("stage").querySelector('[data-id="rain"]');if(el)el.remove();
   if(selId==="rain")selId=S.rs[0].id;
-  log("にじボンは「我輩、旅に出るのだぞ」と言い残し、虹の橋を渡って島を去っていった…。");
+  log("にじボンは「我輩、旅に出るのである」と言い残し、虹の橋を渡って島を去っていった…。");
   return;
  }
  if(!S.rainWarn&&Math.random()<p+.05){
   S.rainWarn=true;
   log("にじボンが、虹の向こうをじっと見つめている…。「我輩の居場所は、ここなのだろうか」");
-  talkTo(rn,"虹の向こうが、気になるのだぞ…",5000);setX(rn,"down",5000);
+  talkTo(rn,"虹の向こうが、気になるのである…",5000);setX(rn,"down",5000);
  }else if(S.rainWarn&&!lonely&&Math.random()<.5){
-  S.rainWarn=false;log("にじボンは、旅に出るのをやめた。「やはり、この島がよいのだぞ！」");setX(rn,"happy",4500);
+  S.rainWarn=false;log("にじボンは、旅に出るのをやめた。「やはり、この島がよいのである！」");setX(rn,"happy",4500);
  }
 }
 function arrive(id,msg){
@@ -825,7 +825,7 @@ function nextDay(){
    if(Math.random()<.6){S.rainStreak=(S.rainStreak||1)+1;log("雨はまだふり続いている。");
     if(rn&&S.rainStreak>=2){rn.joy=clamp(rn.joy-6);log("雨がふり続いて、にじボンは元気がない。「我輩、にじが見たい…」");setX(rn,"down",4500)}}
    else{S.weather="sunny";log("雨があがった。");
-    if(rn&&S.rainStreak>=2){rn.joy=clamp(rn.joy+12);log("雨あがりの空に虹がかかった！にじボンは大よろこび。「我輩の出番なのだぞ！」");setX(rn,"happy",5500)}
+    if(rn&&S.rainStreak>=2){rn.joy=clamp(rn.joy+12);log("雨あがりの空に虹がかかった！にじボンは大よろこび。「我輩の出番である！」");setX(rn,"happy",5500)}
     S.rainStreak=0}
   }else if(Math.random()<.25){S.weather="rain";S.rainStreak=1;log("雨がふりはじめた。")}
  }
@@ -838,7 +838,7 @@ function nextDay(){
  const id=ARRIVE[S.day];
  if(id&&!R(id))arrive(id,CAST[id].name+"が船で島にやってきた。新しい仲間だ！");
  if(false&&!R("rain")&&(!S.rainLeft||S.day>=S.rainLeft+6)&&S.day>=8&&S.rs.length>=4&&S.rs.every(r=>r.bond>=40&&r.hunger>=30))
-  {const back=!!S.rainLeft;S.rainLeft=0;arrive("rain",back?"空に大きな虹がかかり、旅に出ていたにじボンが帰ってきた！「ただいまなのだぞ！」":"空に大きな虹がかかり、にじボンが現れた！みんなが仲よしだから会いに来たみたい。")}
+  {const back=!!S.rainLeft;S.rainLeft=0;arrive("rain",back?"空に大きな虹がかかり、旅に出ていたにじボンが帰ってきた！「ただいまである！」":"空に大きな虹がかかり、にじボンが現れた！みんなが仲よしだから会いに来たみたい。")}
  initAffinity();rainLeave();awayCheck();abilities();festival();
  resolveQuarrels();homeLife();
  pairEvent();
@@ -851,7 +851,7 @@ function nextDay(){
  if(Math.random()<.3){log(pick(SEASON_EV[season().k]));S.rs.forEach(r=>{r.joy=clamp(r.joy+3);setX(r,"happy",3500)})}
 
  {const rn=R("rain");if(rn&&S.rs.length>=3&&S.weather!=="rain"&&Math.random()<.4){
-  log("にじボンが「みんなで遊ぶのだぞ！」と誘って、全員でかくれんぼをした。");
+  log("にじボンが「みんなで遊ぶのである！」と誘って、全員でかくれんぼをした。");
   S.rs.forEach(r=>{r.joy=clamp(r.joy+5);setX(r,"happy",4500)});rn.joy=clamp(rn.joy+10);rn.bond=clamp(rn.bond+4);
   for(let i=0;i<S.rs.length;i++)for(let j=i+1;j<S.rs.length;j++){const k=pk(S.rs[i].id,S.rs[j].id);S.rel[k]=Math.min(100,(S.rel[k]||0)+3)}
  }}
@@ -1226,7 +1226,7 @@ const FEST=[
 const FEST_SAY={
  oko:["アタシが一番乗りよ！","負けないわよ、おまつりでも！"],niko:["たのしーい！","みんなで盛り上がろ！"],
  hyoe:["ボ、ボン！？ …きれい！","あわわ…こわいけど、たのしい…"],mogu:["おいしそう〜！ ボーン！","うち、食べる係！"],
- nemu:["ふぁ…きれい…","…ねむいけど、いる"],tere:["み、みんなの前は…でも、がんばります","あ、あの…たのしいです"],rain:["我輩の虹も出すのだぞ！","祭りは、よいものだぞ"]
+ nemu:["ふぁ…きれい…","…ねむいけど、いる"],tere:["み、みんなの前は…でも、がんばります","あ、あの…たのしいです"],rain:["我輩の虹も出すのである！","祭りは、よいものである"]
 };
 function festival(){
  if((S.day-1)%10!==4)return;
@@ -1266,19 +1266,19 @@ const LET_RET={
  mogu:"{c}、うちね、いろんな食べ物見つけたよ！ こんどいっしょに食べよ！",
  nemu:"…ふぁ。{c}、いい夢だった。…そばに、いていい？",
  tere:"あ、あの、{c}。お手紙なら、顔を見なくていいので、少し得意です…ただいま、です。",
- rain:"{c}よ、旅の空から虹を見たぞ。我輩は、この島に帰ってきたのだぞ。"
+ rain:"{c}よ、旅の空から虹を見たぞ。我輩は、この島に帰ってきたのである。"
 };
 const LET_B50={
  oko:"…{c}。べ、別にお礼とかじゃないけど。いつも、ありがと。",niko:"{c}、いつもありがとう！ わたしね、{c}に会えてよかったよ。",
  hyoe:"{c}…ボン、ここにいると安心します。ありがとう、です…",mogu:"{c}へ。いつもごはんありがと！ うちの宝もの、こんど見せるね。",
  nemu:"…{c}。いつも、ありがと。僕、ここ、すき。",tere:"{c}、あの、少しだけ、お顔を見てお話しできるようになりました。ありがとうございます。",
- rain:"{c}よ。そなたと見る虹は、格別なのだぞ。感謝するぞ。"
+ rain:"{c}よ。そなたと見る虹は、格別である。感謝するぞ。"
 };
 const LET_B80={
  oko:"{c}へ。あんたは、アタシの一番の…いや、なんでもない！ これからもよろしく。",niko:"{c}、だいすき！ ずっとずっと、いっしょにいようね！",
  hyoe:"{c}…ボン、もうおびえなくても大丈夫な気がします。{c}のおかげです。",mogu:"{c}、うちの一番おいしいおにぎり、あげる！ ずっと友だちだよ！",
  nemu:"…{c}。ずっと、そばにいて。おやすみ。",tere:"{c}、私、{c}の前だと、素直になれます。ありがとうございます。",
- rain:"{c}よ。我輩の虹は、そなたのためにも、かかっているのだぞ。"
+ rain:"{c}よ。我輩の虹は、そなたのためにも、かかっているのである。"
 };
 function addLetter(id,kind,text){
  S.letters.unshift({d:S.day,from:id,kind,t:text.split("{c}").join(id==="guide"?"管理人さん":callOf(id)),read:false});
@@ -1613,9 +1613,9 @@ const MGR={
   thanksBase:["あ、ありがとうございます…！","そ、そんな、私に…"],
   thanksClose:["{c}、ありがとうございます。ちゃんと目を見て言えました…","{c}のおかげです…ありがとうございます"]},
  rain:{greet:["よく来た、{c}","我輩の虹を見よ、{c}"],
-  idleBase:["{c}、我輩にまかせるのだ","うむ、{c}、今日もよい日なのだぞ","我輩の虹は、まだまだ大きくなるのだ"],
-  idleClose:["{c}、疲れてはおらぬか？ 我輩がそばにおる","{c}、いつも感謝しておるぞ","{c}と見る虹は、格別なのだぞ"],
-  thanksBase:["うむ、感謝するぞ","我輩、満足なのだぞ"],
+  idleBase:["{c}、我輩にまかせるのである","うむ、{c}、今日もよい日である","我輩の虹は、まだまだ大きくなるのである"],
+  idleClose:["{c}、疲れてはおらぬか？ 我輩がそばにおる","{c}、いつも感謝しておるぞ","{c}と見る虹は、格別である"],
+  thanksBase:["うむ、感謝するぞ","我輩、満足である"],
   thanksClose:["{c}、そなたのやさしさ、我輩は忘れぬ","ありがとう、{c}。我輩、うれしいぞ"]}
 };
 function callOf(id){
@@ -1916,7 +1916,7 @@ function decideSky(prevWeather){
  if(sky==="storm"){
   log("⛈ 雷がごろごろ鳴っている。");
   if(hy){hy.joy=clamp(hy.joy-8);setX(hy,"scared",4500);talkTo(hy,"ボ、ボン！？ かみなり…！",4000);log("ひょえボンは、雷におびえて、管理人のそばにかくれた。")}
-  if(rn){rn.joy=clamp(rn.joy+3);talkTo(rn,"雷もよいものだぞ！",3500)}
+  if(rn){rn.joy=clamp(rn.joy+3);talkTo(rn,"雷もよいものである！",3500)}
   if(ne&&Math.random()<.5){ne.joy=clamp(ne.joy-4)}
  }else if(sky==="fog"){
   log("🌫 島に、深い霧が出ている。");
@@ -1930,7 +1930,7 @@ function decideSky(prevWeather){
  }else if(sky==="rainbow"){
   log("🌈 雨あがりの空に、大きな虹がかかった。");
   S.rs.forEach(r=>{r.joy=clamp(r.joy+4)});
-  if(rn){rn.joy=clamp(rn.joy+8);setX(rn,"happy",5000);talkTo(rn,"我輩の虹なのだぞ！",4000)}
+  if(rn){rn.joy=clamp(rn.joy+8);setX(rn,"happy",5000);talkTo(rn,"我輩の虹である！",4000)}
  }
  bookDirty=true;
 }
@@ -2124,7 +2124,7 @@ const VOICE={
  mogu:{tic:["もぐもぐ…","はむはむ…"],surprise:["もぐっ！"],angry:["むぅ…うちのだよ〜…"],down:["もういっこ、もらえる…？","おなか、すいたよ〜…"],hungry:["おなかすいたよ〜…"],solo:["はむはむ…","もぐもぐ…おいしいね〜","あとで、なに食べよっかなぁ…"]},
  nemu:{tic:["ふぁ…","すや…","むにゃ…","…ん"],surprise:["…うん？"],angry:["…やだ…"],down:["…ふぁ…ねむいね…"],hungry:["…おなか…すいたね…ふぁ…"],solo:["ごろごろ…","すや…","むにゃ…あったかいね…ふぁ…"]},
  tere:{tic:["あ、あの…","うう…","えっと…"],surprise:["えっ…、えっ！？"],angry:["うう…ですっ…！"],down:["恥ずかしい…","…恥ずかしいですっ…！"],hungry:["あ、あの…おなかが…ですっ…"],solo:["カキカキ…(手紙を書いている)","えっと…なんて書こう…","ううっ…ですっ…！"]},
- rain:{tic:["うむ！","よく聞けい！","虹よ、答えろ！"],surprise:["むっ！"],angry:["むぅっ！ だぞ！"],down:["いや、ここらで一つ…","むぅ…我輩の虹が、出ないのだぞ…"],hungry:["腹が減ったのだぞ…"],solo:["空よ、よく聞けい！","うむ！ 今日も虹は、わが胸にあるのだ！","虹よ、答えろ！"]}
+ rain:{tic:["うむ！","よく聞けい！","虹よ、答えろ！"],surprise:["むっ！"],angry:["むぅっ！ だぞ！"],down:["いや、ここらで一つ…","むぅ…我輩の虹が、出ないのである…"],hungry:["腹が減ったのである…"],solo:["空よ、よく聞けい！","うむ！ 今日も虹は、わが胸にあるのである！","虹よ、答えろ！"]}
 };
 function ticify(id,line){
  const v=VOICE[id];if(!v||!v.tic.length||Math.random()>.3)return line;
@@ -2162,11 +2162,11 @@ hyoe:{greet:["あ、こんにちは！ あわわ…","{c}、こんにちは〜�
   idleClose:["{c}、今日は、ちゃんとお顔を見てお話しできますっ…！","{c}、あの、お話ししても、いいですかっ…？","{c}と話すと、少し安心しますですっ…！"],
   thanksBase:["あ、ありがとうございますですっ…！","そ、そんな、私になんてですっ…！"],
   thanksClose:["{c}、ありがとうございますっ…ちゃんと目を見て言えましたですっ…！","{c}のおかげですっ…ありがとうございますですっ…！"]},
- rain:{greet:["よく来たな、{c}！","うむ！ 我輩の虹を見るがよいのだ、{c}！"],
-  idleBase:["{c}、我輩にまかせるのだぞ！","うむ！ {c}、今日もよい日だぞ！","我輩の虹は、まだまだ大きくなるのだぞ！"],
-  idleClose:["{c}、疲れてはおらぬか？ 我輩がそばにいるのだぞ！","{c}、いつも感謝しているのだぞ！","{c}と見る虹は、格別なのだ！"],
-  thanksBase:["うむ！ 感謝するぞ！","我輩、満足なのだ！"],
-  thanksClose:["{c}、そなたのやさしさ、我輩は忘れぬのだぞ！","ありがとう、{c}！ 我輩、うれしいのだぞ！"]}
+ rain:{greet:["よく来たな、{c}！","うむ！ 我輩の虹を見るがよいのである、{c}！"],
+  idleBase:["{c}、我輩にまかせるのである！","うむ！ {c}、今日もよい日だぞ！","我輩の虹は、まだまだ大きくなるのである！"],
+  idleClose:["{c}、疲れてはおらぬか？ 我輩がそばにいるのである！","{c}、いつも感謝しているのである！","{c}と見る虹は、格別である！"],
+  thanksBase:["うむ！ 感謝するぞ！","我輩、満足である！"],
+  thanksClose:["{c}、そなたのやさしさ、我輩は忘れぬのである！","ありがとう、{c}！ 我輩、うれしいのである！"]}
 });
 {const o=mgrLine;mgrLine=function(r,kind){return ticify(r.id,o(r,kind))}}
 /* letters & festival lines in the new voices */
@@ -2176,7 +2176,7 @@ Object.assign(LET_RET,{
  mogu:"{c}、うちね、いろんな食べ物見つけたよ〜！ こんどいっしょに食べようね〜…もぐもぐ…",
  nemu:"…ふぁ。{c}、いい夢だったよ…。…そばに、いていいかな…ふぁ…",
  tere:"あ、あの、{c}。お手紙なら、顔を見なくていいので、少し得意ですっ…！ ただいま、ですっ…！",
- rain:"{c}よ、旅の空から虹を見たのだぞ！ 我輩は、この島に帰ってきたのだ！ うむ！"
+ rain:"{c}よ、旅の空から虹を見たのである！ 我輩は、この島に帰ってきたのである！ うむ！"
 });
 Object.assign(LET_B50,{
  niko:"{c}、いつもありがとう！ わたしね、{c}に会えて、よかったよ☆",
@@ -2184,7 +2184,7 @@ Object.assign(LET_B50,{
  mogu:"{c}へ。いつもごはんありがとだよ〜。うちの宝もの、こんど見せるね〜…はむはむ…",
  nemu:"…{c}。いつも、ありがとだね…ふぁ…。僕、ここ、すきだよ…",
  tere:"{c}、あの、少しだけ、お顔を見てお話しできるようになりましたですっ…！ ありがとうございますですっ…！",
- rain:"{c}よ。そなたと見る虹は、格別なのだぞ！ 感謝するのだ！ うむ！"
+ rain:"{c}よ。そなたと見る虹は、格別である！ 感謝するのである！ うむ！"
 });
 Object.assign(LET_B80,{
  niko:"{c}、だいすきだよ！ ずっとずっと、いっしょにいようね☆♪",
@@ -2192,12 +2192,12 @@ Object.assign(LET_B80,{
  mogu:"{c}、うちの一番おいしいおにぎり、あげるよ〜！ ずっと友だちだよ〜…もぐもぐ…",
  nemu:"…{c}。ずっと、そばにいてほしいね…。おやすみ…ふぁ…",
  tere:"{c}、私、{c}の前だと、素直になれますっ…！ ありがとうございますですっ…！",
- rain:"{c}よ。我輩の虹は、そなたのためにも、かかっているのだぞ！ うむ！"
+ rain:"{c}よ。我輩の虹は、そなたのためにも、かかっているのである！ うむ！"
 });
 Object.assign(FEST_SAY,{
  niko:["たのしーい！ わーい♪","みんなで盛り上がろうね☆"],hyoe:["ふにゃっ！ …きれい！","あわわ…こわいけど、たのしい！"],
  mogu:["おいしそうだよ〜…ボーン！","うち、食べる係だよ〜！ はむはむ…"],nemu:["ふぁ…きれいだね…","…ねむいけど、いるよ…ふぁ…"],
- tere:["み、みんなの前は…でも、がんばりますっ…！","あ、あの…たのしいですっ…！"],rain:["我輩の虹も出すのだぞ！ うむ！","祭りは、よいものなのだ！"]
+ tere:["み、みんなの前は…でも、がんばりますっ…！","あ、あの…たのしいですっ…！"],rain:["我輩の虹も出すのである！ うむ！","祭りは、よいものである！"]
 });
 /* extra idle lines */
 const IDLE_V={
@@ -2206,7 +2206,7 @@ const IDLE_V={
  mogu:["もぐもぐ…おなかすいたね〜","はむはむ…おいしいよ〜"],
  nemu:["ふぁ…ねむいね…","すや…むにゃ…"],
  tere:["あ、あの…えっと…ですっ…！","うう…恥ずかしいですっ…"],
- rain:["うむ！ 虹の準備は、万全なのだぞ！","よく聞けい！ 我輩はここにいるのだ！"],
+ rain:["うむ！ 虹の準備は、万全である！","よく聞けい！ 我輩はここにいるのである！"],
  oko:["むぅ〜っ、まだなの？","アタシが一番なんだから！"]
 };
 Object.keys(IDLE_V).forEach(id=>IDLE_V[id].forEach(l=>CAST[id].idle.push(l)));
@@ -2321,7 +2321,7 @@ const GIFT_SAY={
  niko:{かざり:"わぁっ！ かわいい〜！ ありがとう☆",はな:"わーい、お花だ♪ ありがとう！"},
  nemu:{ふとん:"…ふかふか…すや…ありがとだね…ふぁ…"},
  tere:{てがみ:"あ、あの…読みますっ…！ うれしいですっ…！"},
- rain:{ぼうえんきょう:"うむ！ これで空がよく見えるのだぞ！"}
+ rain:{ぼうえんきょう:"うむ！ これで空がよく見えるのである！"}
 };
 {const o=give;give=function(n){
  const r=R(selId),had=r.d.gift||0;
@@ -2337,7 +2337,7 @@ const FAVE={
 };
 const FAVE_SAY={
  niko:"今日はいい季節だね☆ わーい♪",hyoe:"あわわ…今日は落ち着くなぁ…",mogu:"いい日だよ〜…もぐもぐ…",nemu:"ぽかぽか…すや…ふぁ…",
- tere:"あ、あの…星がきれいですっ…！",rain:"うむ！ 今日の空は格別なのだぞ！"
+ tere:"あ、あの…星がきれいですっ…！",rain:"うむ！ 今日の空は格別である！"
 };
 {const o=autoPhase;autoPhase=function(ph){
  o(ph);
@@ -2356,7 +2356,7 @@ const FAVE_SAY={
 const FAVG={mogu:"おにぎりキャッチ",tere:"しんけいすいじゃく",rain:"にじタイミング",hyoe:"ボンさがし"};
 const GSAY={
  oko:"ふんっ、ぜんぶアタシの得意なんだから！",niko:"みんなでやると、たのしいね☆",hyoe:"あわわ…にげるのは、まかせて！",
- mogu:"もぐもぐ…これは得意だよ〜！",nemu:"…ふぁ…ゆっくりなら、できるね…",tere:"ていねいに…ですっ…！",rain:"よく聞けい！ 高いところは我輩の領分なのだ！"
+ mogu:"もぐもぐ…これは得意だよ〜！",nemu:"…ふぁ…ゆっくりなら、できるね…",tere:"ていねいに…ですっ…！",rain:"よく聞けい！ 高いところは我輩の領分である！"
 };
 function gameBonus(r,gname){
  let b=0;
@@ -2386,9 +2386,9 @@ SPOT.hyoe=[46,52];SPOT.mogu=[24,46];SPOT.tere=[14,34];
 
 /* rain-chan sometimes breaks the fourth wall */
 const RAIN_META=[
- "うむ！ 実はこの島、まだ開発中なのだぞ！","よく聞けい！ さくしゃボンが今、我輩のセリフを考えておるのだ…！","バグ？ 我輩は知らぬのだ…！ さくしゃボンに聞けい！",
- "セーブはされておるぞ！ 安心せい！","画面の外から、誰かが見ておる気配がするのだ…","虹よ、答えろ！ …更新はいつ来るのだ？","むっ！ いま、画面がちょっと揺れたのだぞ！",
- "我輩たちのセリフには、設定表があるらしいのだ","うむ！ 島の管理人よ、今日もログインご苦労なのだぞ！"
+ "うむ！ 実はこの島、まだ開発中である！","よく聞けい！ さくしゃボンが今、我輩のセリフを考えておるのである…！","バグ？ 我輩は知らぬのである…！ さくしゃボンに聞けい！",
+ "セーブはされておるぞ！ 安心せい！","画面の外から、誰かが見ておる気配がするのである…","虹よ、答えろ！ …更新はいつ来るのである？","むっ！ いま、画面がちょっと揺れたのである！",
+ "我輩たちのセリフには、設定表があるらしいのである","うむ！ 島の管理人よ、今日もログインご苦労である！"
 ];
 RAIN_META.forEach(l=>VOICE.rain.solo.push(l));
 {const o=mgrLine;mgrLine=function(r,kind){
@@ -2410,7 +2410,7 @@ RAIN_META.forEach(l=>VOICE.rain.solo.push(l));
  else if(id==="mogu"){talkTo(r,"もぐもぐ…ごはんの話なら、もっとほめてほしいよ〜",3400)}
  else if(id==="nemu"){talkTo(r,"…すや…いい寝顔って言われたい…ふぁ…",3400)}
  else if(id==="tere"){talkTo(r,"あ、あの…ちゃんと話せましたか…？ ですっ…！",3400)}
- else if(id==="rain"){r.joy=clamp(r.joy+3);talkTo(r,"うむ！ 島を見守るのが我輩のつとめなのだぞ！",3600)}
+ else if(id==="rain"){r.joy=clamp(r.joy+3);talkTo(r,"うむ！ 島を見守るのが我輩のつとめである！",3600)}
 }}
 
 /* soothing: oko calms down through a match; niko loses her ☆♪ when sad */
@@ -2434,7 +2434,7 @@ function okoSoothe(r,mode){
 {const o=rewardMini;rewardMini=function(r,g,s,m){
  o(r,g,s,m);
  const ra=R("rain");
- if(ra&&ra.joy<55){ra.joy=clamp(ra.joy+6);if(Math.random()<.5)talkTo(ra,"うむ！ みなで遊ぶのは、悪くないのだぞ！",3200)}
+ if(ra&&ra.joy<55){ra.joy=clamp(ra.joy+6);if(Math.random()<.5)talkTo(ra,"うむ！ みなで遊ぶのは、悪くないのである！",3200)}
 }}
 /* tere hides: niko can coax her back */
 {const o=nextDay;nextDay=function(){
@@ -2454,7 +2454,7 @@ const ROUT={
  mogu:[0,["パトロールだよ〜…おいしいもの、ないかなぁ","木の実、見つけたよ〜…もぐもぐ…"]],
  nemu:[1,["…日なた、見つけた…ふぁ…","…ここ、ぽかぽか…すや…"]],
  tere:[3,["いち、にぃ…星が、いっぱいですっ…！","あ、あの…数え終わりませんですっ…"]],
- rain:[0,["観測、開始なのだぞ！ むっ…よく聞けい！","うむ！ 今日の空を、演説するのだぞ！"]]
+ rain:[0,["観測、開始である！ むっ…よく聞けい！","うむ！ 今日の空を、演説するのである！"]]
 };
 {const o=autoPhase;autoPhase=function(ph){
  o(ph);
@@ -2489,7 +2489,7 @@ const PAIR_SCN=[
  {a:"hyoe",b:"nemu",e:"🌙",n:"ねむボンが、ひょえボンのそばでうとうとしながら、そっと守っていた。",
   fa:["あわわ…ねむボンがいると、こわくないや…ふにゃぁ…","ここ、あったかいね…あわわ…"],fb:["…だいじょうぶだね…僕が、ここにいるからね…ふぁ…","…ん…こわいの、こないよ…すや…"],ja:8,jb:3},
  {a:"rain",b:"niko",e:"🌈",n:"にじボンが空に向かって演説して、にこボンが大きな拍手を送っていた。",
-  fa:["よく聞けい！ 虹とは、希望のかけ橋なのだぞ！","うむ！ 虹よ、答えろ！"],fb:["わーい、すごいすごい！ ぱちぱち☆","かっこいいね、にじボン！ ぱちぱち♪"],ja:6,jb:5},
+  fa:["よく聞けい！ 虹とは、希望のかけ橋である！","うむ！ 虹よ、答えろ！"],fb:["わーい、すごいすごい！ ぱちぱち☆","かっこいいね、にじボン！ ぱちぱち♪"],ja:6,jb:5},
  {a:"oko",b:"mogu",e:"🍙",n:"おこボンともぐボンが、おにぎりをめぐって勝負していた。",
   fa:["今日こそ、アタシが勝つんだから！","もぐボンなんかに負けないわよ！"],fb:["もぐもぐ…勝負？ いいよ〜…","うち、おにぎりなら負けないよ〜"],ja:0,jb:0}
 ];
@@ -2560,12 +2560,12 @@ const TERE_LONG=[
 }}
 /* rain: more meta + calm wisdom */
 const RAIN_META2=[
- "むっ！ 今、バグの気配がしたのだぞ！ …気のせいか？","好感度とやらが上がったのだぞ！ …いや、我輩のではない、そなたとのだ！","さくしゃボンよ、聞いておるか！ 我輩の出番をもう少し増やすのだぞ！",
- "いまこの画面を見ておるのは誰なのだ？ …そなたか、管理人よ！","更新があると、世界がほんの少しだけ変わるのだ。ふしぎなものだぞ","ステータスとやらが見えるのだ…我輩の元気は、いかほどだ？",
- "ほかの島のゲームのボンも見てみたいのだぞ！ …準備中らしいが","このセリフ、設定表にあったのだぞ！ …我輩、知っておるのだ！"
+ "むっ！ 今、バグの気配がしたのである！ …気のせいか？","好感度とやらが上がったのである！ …いや、我輩のではない、そなたとのである！","さくしゃボンよ、聞いておるか！ 我輩の出番をもう少し増やすのである！",
+ "いまこの画面を見ておるのは誰である？ …そなたか、管理人よ！","更新があると、世界がほんの少しだけ変わるのである。ふしぎなものである","ステータスとやらが見えるのである…我輩の元気は、いかほどだ？",
+ "ほかの島のゲームのボンも見てみたいのである！ …準備中らしいが","このセリフ、設定表にあったのである！ …我輩、知っておるのである！"
 ];
 const RAIN_CALM=[
- "虹は消えるからこそ、うつくしいのだぞ…","雨が降るのも、空の呼吸なのだ。あわてることはないぞ","出会いも別れも、風のようなものなのだ…うむ","我輩が去ろうと残ろうと、空はここにあるのだぞ"
+ "虹は消えるからこそ、うつくしいのである…","雨が降るのも、空の呼吸である。あわてることはないぞ","出会いも別れも、風のようなものである…うむ","我輩が去ろうと残ろうと、空はここにあるのである"
 ];
 RAIN_META2.forEach(l=>VOICE.rain.solo.push(l));
 RAIN_CALM.forEach(l=>VOICE.rain.solo.push(l));
@@ -2583,7 +2583,7 @@ RAIN_CALM.forEach(l=>VOICE.rain.solo.push(l));
  if(ph===1&&ra&&!ra.sleep&&S.sky==="rainbow"&&S.poseDay!==S.day){
   S.poseDay=S.day;
   ra.joy=clamp(ra.joy+8);setX(ra,"happy",4000);
-  talkTo(ra,"虹よ、答えろ！ …見よ、これが我輩の決めポーズなのだぞ！",4200);
+  talkTo(ra,"虹よ、答えろ！ …見よ、これが我輩の決めポーズである！",4200);
   log("🌈 にじボンが決めポーズとともに、大きな虹をかけた！");
   const el=stageEl.querySelector('[data-id="rain"]');
   if(el){el.classList.add("pose");setTimeout(()=>el.classList.remove("pose"),1800)}
@@ -2592,7 +2592,7 @@ RAIN_CALM.forEach(l=>VOICE.rain.solo.push(l));
  if((ph===1||ph===2)&&ra&&hy&&!ra.sleep&&S.sky==="storm"&&S.thunderDay!==S.day){
   S.thunderDay=S.day;
   hy.joy=clamp(hy.joy+9);ra.joy=clamp(ra.joy+3);
-  talkTo(ra,"案ずるな、ひょえボン。雨のあとには、必ず虹が出るのだぞ！",3800);
+  talkTo(ra,"案ずるな、ひょえボン。雨のあとには、必ず虹が出るのである！",3800);
   talkTo(hy,"あわわ…ほんと？ …ちょっと、こわくなくなったかも…",3800);
   log("⛈ にじボンが、雷におびえるひょえボンに「雨のあとには虹が出る」となだめた。");
  }
@@ -2609,14 +2609,14 @@ RAIN_CALM.forEach(l=>VOICE.rain.solo.push(l));
 
 /* ================= v10: rain parables, storm-night leader, candy weakness ================= */
 const RAIN_PARA=[
- "虹にはな…雨と光、どちらも必要なのだぞ。うむ！","遠くの空を見るには、まず足元を固めるのだ。よく聞けい！","一人で出す虹は小さい。みなで出す虹は、大きいのだぞ！","曇り空は、虹の準備中なのだ。うむ！"
+ "虹にはな…雨と光、どちらも必要である。うむ！","遠くの空を見るには、まず足元を固めるのである。よく聞けい！","一人で出す虹は小さい。みなで出す虹は、大きいのである！","曇り空は、虹の準備中である。うむ！"
 ];
 {const o=autoPhase;autoPhase=function(ph){
  o(ph);
  const ra=R("rain");if(!ra||ra.sleep)return;
  if(ph===3&&S.sky==="storm"&&S.stormLead!==S.day){
   S.stormLead=S.day;
-  talkTo(ra,"恐れるな、みなの者！ 我輩がついておるのだぞ！ 嵐は必ず過ぎるのだ！",4200);
+  talkTo(ra,"恐れるな、みなの者！ 我輩がついておるのである！ 嵐は必ず過ぎるのである！",4200);
   S.rs.forEach(x=>{if(x.id!=="rain")x.joy=clamp(x.joy+4)});
   log("⛈ 嵐の夜、にじボンが大きな声でみんなを励ました。");
  }
@@ -2625,7 +2625,7 @@ const RAIN_PARA=[
 {const o=feed;feed=function(n){
  const r=R(selId),cand=r&&r.id==="rain"&&n==="ペロペロキャンディ"&&r.joy<55;
  o(n);
- if(cand){r.joy=clamp(r.joy+14);setX(r,"happy",3500);talkTo(r,"む、むぅ…ごまかされてなど、おらぬのだぞ…！ …ぺろぺろ",3800);log("にじボンは、キャンディをもらって、つい機嫌を直してしまった。")}
+ if(cand){r.joy=clamp(r.joy+14);setX(r,"happy",3500);talkTo(r,"む、むぅ…ごまかされてなど、おらぬのである…！ …ぺろぺろ",3800);log("にじボンは、キャンディをもらって、つい機嫌を直してしまった。")}
 }}
 
 
@@ -2639,7 +2639,7 @@ realEventNow=function(){return null};
 /* softer endings when very close to the manager */
 const SOFTEN={
  tere:[[/ですっ…！/g,"です…"],[/ますっ…！/g,"ます…"],[/ですっ…/g,"です…"]],
- rain:[[/のだぞ！/g,"のだぞ"],[/なのだ！/g,"なのだ"]],
+ rain:[[/のである！/g,"のである"],[/である！/g,"である"]],
  oko:[[/わよ！/g,"わよ"],[/んだから！/g,"んだから"],[/ふん、/g,"…ふふ、"],[/ふん！/g,"…ふふ"],[/、ふん$/,"、ふふ"]],
  niko:[],hyoe:[],mogu:[],nemu:[]
 };
@@ -2651,7 +2651,7 @@ const SOFTEN={
 /* ---- anniversary (in-game Day) ---- */
 const ANNIV=[30,60,100,150,200,300];
 const ANN_SAY={oko:"…あんたと会ってから、もう{n}日ね。悪くないわ",niko:"出会って{n}日だね！ ありがとう☆",hyoe:"あわわ…もう{n}日…ボン、ここにいてよかった…",
- mogu:"もう{n}日だよ〜…おにぎり、いっぱい食べたね〜",nemu:"…{n}日…ふぁ…ありがとだね…",tere:"{n}日…あの、ありがとうございます…！",rain:"うむ！ {n}日なのだぞ！ 感謝するのだ！"};
+ mogu:"もう{n}日だよ〜…おにぎり、いっぱい食べたね〜",nemu:"…{n}日…ふぁ…ありがとだね…",tere:"{n}日…あの、ありがとうございます…！",rain:"うむ！ {n}日である！ 感謝するのである！"};
 function anniversary(){
  if(!ANNIV.includes(S.day))return;
  S.annDone=S.annDone||{};if(S.annDone[S.day])return;S.annDone[S.day]=1;
@@ -2668,7 +2668,7 @@ function birthdayAsk(){
  const d=document.createElement("div");d.id="bdask";
  d.style.cssText="position:fixed;left:0;right:0;bottom:0;z-index:900;padding:14px;display:flex;justify-content:center";
  d.innerHTML='<div style="max-width:420px;width:100%;background:var(--paper);color:var(--ink);border:2.5px solid var(--line);border-radius:18px;box-shadow:4px 4px 0 var(--line);padding:14px">'
-  +'<p style="margin:0 0 8px;font-weight:700">にじボン「うむ、管理人よ。誕生日はいつなのだ？ 島の季節と、そのはじめ・なかば・おわりで教えるのだぞ！」</p>'
+  +'<p style="margin:0 0 8px;font-weight:700">にじボン「うむ、管理人よ。誕生日はいつである？ 島の季節と、そのはじめ・なかば・おわりで教えるのである！」</p>'
   +'<div style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><select id="bds" aria-label="季節">'+BSEAS.map((s,i)=>'<option value="'+i+'">'+s+'</option>').join("")+'</select><select id="bdd" aria-label="時期">'+[["はじめ",2],["なかば",5],["おわり",9]].map(x=>'<option value="'+x[1]+'">'+x[0]+'</option>').join("")+'</select></div>'
   +'<div style="display:flex;gap:8px"><button class="go" type="button" id="bdok">おしえる</button><button class="act" type="button" id="bdno" style="padding:8px 14px">あとで</button></div></div>';
  document.body.appendChild(d);
@@ -2676,7 +2676,7 @@ function birthdayAsk(){
  document.getElementById("bdno").addEventListener("click",()=>{S.bdAsked=null;S.bdLater=S.day+5;d.remove();save()});
 }
 const BD_SAY={oko:"…誕生日、おめでとう。べ、別に祝いたかったわけじゃないわよ！",niko:"お誕生日おめでとう！ わーい、お祝いだよ☆",hyoe:"あわわ…おめでとう…ボン、うれしいよ…",
- mogu:"おめでとうだよ〜…ケーキ、半分こしようね〜",nemu:"…おめでとう…ふぁ…僕からの、ふかふかだよ…",tere:"お、お誕生日、おめでとうございますっ…！",rain:"うむ！ 誕生日おめでとうなのだぞ！ 虹を出そう！"};
+ mogu:"おめでとうだよ〜…ケーキ、半分こしようね〜",nemu:"…おめでとう…ふぁ…僕からの、ふかふかだよ…",tere:"お、お誕生日、おめでとうございますっ…！",rain:"うむ！ 誕生日おめでとうである！ 虹を出そう！"};
 function birthday(){
  if(!S.bd)return;
  const doy=(S.day-1)%40,rg={2:[0,2],5:[3,6],9:[7,9]}[S.bd.d]||[S.bd.d-1,S.bd.d-1],base=S.bd.s*10;
@@ -2747,7 +2747,7 @@ const HOBBY={
   say:["風が ことばを はこんでくるですっ…","星は しずかに 手紙を 読んでいるですっ…","あ、あの…まだ、書き途中ですっ…！"],
   log:"てれボンが、木のうしろで詩を書いていた。"},
  rain:{n:"ボン観察",ic:"🔭",d:"島のボンたちを見て、ノートにまとめている。",
-  say:["ふむ…観察の時間なのだぞ！","よく聞けい！ みなの様子は、すべて我輩が見ておるのだ","観察ノート、更新なのだぞ！"],
+  say:["ふむ…観察の時間である！","よく聞けい！ みなの様子は、すべて我輩が見ておるのである","観察ノート、更新である！"],
   log:"にじボンが高いところから、ボンたちの観察ノートをつけている。"}
 };
 S.hob=S.hob||{};
@@ -2758,8 +2758,8 @@ function hobbyAct(r){
  if(r.id==="rain"){
   const t=pick(S.rs.filter(x=>x.id!=="rain"));
   if(t){
-   const note=t.hunger<40?"腹をすかせておるな":t.joy<40?"元気がないようだな":t.joy>75?"ご機嫌なのだぞ":"のんびりしておるな";
-   say="ふむ…"+CAST[t.id].name+"は、"+note+"。ノートに書いておくのだ";
+   const note=t.hunger<40?"腹をすかせておるな":t.joy<40?"元気がないようだな":t.joy>75?"ご機嫌である":"のんびりしておるな";
+   say="ふむ…"+CAST[t.id].name+"は、"+note+"。ノートに書いておくのである";
   }
  }
  talkTo(r,say,3800);
@@ -2817,7 +2817,7 @@ const INTR={
  mogu:["あっ、畑に入っちゃだめだよ〜…！","もぐっ！ いまお世話中だよ〜"],
  nemu:["…ん…？ 日記、見たの…？ …やだ…","…ふぁ…夢が、にげちゃった…"],
  tere:["えっ…、えっ！？ み、見ないでくださいっ…！","う、うう…まだ書き途中ですっ…恥ずかしい…"],
- rain:["むっ！ 観察中なのだぞ！ …そなたも観察されておるのだ","よく聞けい！ いまは大事な記録中なのだぞ！"]
+ rain:["むっ！ 観察中である！ …そなたも観察されておるのである","よく聞けい！ いまは大事な記録中である！"]
 };
 {const o=chat;chat=function(){
  const r=R(selId),busy=r&&r.hobbyUntil&&r.hobbyUntil>Date.now();
@@ -2897,7 +2897,7 @@ function seasonScenery(){
 /* landmark use: small flavour in each Bon's habits */
 const LM_USE={
  pond:{ids:["hyoe","nemu"],say:["ぱしゃぱしゃ…お水、つめたい…","池のそば、おちつくね…"]},
- hill:{ids:["rain"],say:["高いところは、よく空が見えるのだぞ！"]},
+ hill:{ids:["rain"],say:["高いところは、よく空が見えるのである！"]},
  kitchen:{ids:["mogu"],say:["キッチンで、ごはんを作るよ〜…もぐもぐ"]},
  stage:{ids:["niko"],say:["ステージで歌うよ♪ ららら〜☆"]}
 };
@@ -2915,11 +2915,11 @@ const LM_USE={
 /* ================= v16: rain-bon's behind-the-scenes talk, unlocked by closeness ================= */
 const RAIN_BACK=[
  [30,[ // 制作の裏話
-  "よく聞けい！ 我輩のセリフは、さくしゃボンが何度も書き直しておるのだぞ…","島の天気は、サイコロのようなものなのだ。さくしゃボンの気まぐれではないぞ…たぶん","さくしゃボンは、島の絵をていねいに描いたのだぞ。我輩も、その中におるのだ","ボンたちには、一人ひとり口ぐせがあるのだぞ。我輩のは「うむ！」なのだ"]],
+  "よく聞けい！ 我輩のセリフは、さくしゃボンが何度も書き直しておるのである…","島の天気は、サイコロのようなものである。さくしゃボンの気まぐれではないぞ…たぶん","さくしゃボンは、島の絵をていねいに描いたのである。我輩も、その中におるのである","ボンたちには、一人ひとり口ぐせがあるのである。我輩のは「うむ！」である"]],
  [50,[ // 他のゲーム・プレイヤー
-  "ほかの島にも、ボンたちがおるらしいのだぞ。色とりどりの、にぎやかな世界らしい","パズルの島では、ボンたちが石をそろえておるらしいのだ。…我輩も呼んでほしいのだぞ","ネコを守るボンの話も聞いたのだぞ。我輩も、虹で守ってやりたいのだ","そなたは、この画面の向こうから我輩たちを見ておるのだな。…よく見るがよいぞ！","そなたが閉じておるあいだも、我輩たちは暮らしておるのだぞ。…たぶんな"]],
+  "ほかの島にも、ボンたちがおるらしいのである。色とりどりの、にぎやかな世界らしい","パズルの島では、ボンたちが石をそろえておるらしいのである。…我輩も呼んでほしいのである","ネコを守るボンの話も聞いたのである。我輩も、虹で守ってやりたいのである","そなたは、この画面の向こうから我輩たちを見ておるのだな。…よく見るがよいぞ！","そなたが閉じておるあいだも、我輩たちは暮らしておるのである。…たぶんな"]],
  [70,[ // ゲーム内の仕様の暗示
-  "なかよしの数字とやらが、ここにはあるらしいのだぞ。…我輩のは、どれくらいなのだ？","好きなものを渡されると、うれしさが大きく上がるのだ。それが我輩たちの決まりなのだぞ","一日に何度もお世話されると、さすがにお腹いっぱいになるのだ。それも決まりなのだぞ","日が進むと、島に新しい場所ができるのだ。そなたも気づいたであろう？","時間の進み方は、そなたが決めておるのだな。早送りは、少し目が回るのだぞ"]]
+  "なかよしの数字とやらが、ここにはあるらしいのである。…我輩のは、どれくらいである？","好きなものを渡されると、うれしさが大きく上がるのである。それが我輩たちの決まりである","一日に何度もお世話されると、さすがにお腹いっぱいになるのである。それも決まりである","日が進むと、島に新しい場所ができるのである。そなたも気づいたであろう？","時間の進み方は、そなたが決めておるのだな。早送りは、少し目が回るのである"]]
 ];
 function rainBackPool(){
  const ra=R("rain");if(!ra)return [];
@@ -2945,7 +2945,7 @@ function rainBackPool(){
  [30,50,70].forEach(b=>{
   if(ra.bond>=b&&!S.rbU[b]){S.rbU[b]=1;
    log("🌈 にじボンが、ちょっとだけ内緒の話をしてくれるようになった。");
-   talkTo(ra,"うむ…そなたには、話してもよいかもしれぬのだぞ…",4200);
+   talkTo(ra,"うむ…そなたには、話してもよいかもしれぬのである…",4200);
   }
  });
 }}
@@ -2957,7 +2957,7 @@ if(!ALLF.includes("お赤飯"))ALLF.push("お赤飯");
 Object.keys(CAST).forEach(id=>{const c=CAST[id];if(c.ff&&c.ff!==ALLF&&!c.ff.includes("お赤飯"))c.ff=c.ff.concat(["お赤飯"])});
 const SEKI_SAY={
  oko:"お赤飯！ …ふん、特別に食べてあげるわ！",niko:"わーい、お赤飯だ！ お祝いだね☆",hyoe:"あわわ…お赤飯だぁ！ ふにゃぁ…",
- mogu:"お赤飯だよ〜！ もぐもぐ…しあわせだね〜",nemu:"…お赤飯…ふぁ…うれしいね…",tere:"お、お赤飯ですっ…！ うれしいですっ…！",rain:"うむ！ お赤飯とは、めでたいのだぞ！"
+ mogu:"お赤飯だよ〜！ もぐもぐ…しあわせだね〜",nemu:"…お赤飯…ふぁ…うれしいね…",tere:"お、お赤飯ですっ…！ うれしいですっ…！",rain:"うむ！ お赤飯とは、めでたいのである！"
 };
 {const o=feed;feed=function(n){
  const r=R(selId);
@@ -2980,14 +2980,14 @@ function sekihanParty(why){
 /* ================= v19: rain-bon secretly loves persimmons (the author likes them) ================= */
 FOODS.push({n:"柿",i:"🍊"});
 if(!ALLF.includes("柿"))ALLF.push("柿");
-RAIN_BACK[0][1].push("我輩は、なぜか柿が大好きなのだぞ。…理由は、さくしゃボンが好きだかららしいのだ","柿を見ると、胸がさわぐのだ。…これも設定表に書いてあるのだぞ、きっと");
+RAIN_BACK[0][1].push("我輩は、なぜか柿が大好きである。…理由は、さくしゃボンが好きだかららしいのである","柿を見ると、胸がさわぐのである。…これも設定表に書いてあるのである、きっと");
 {const o=feed;feed=function(n){
  const r=R(selId),rain=r&&r.id==="rain"&&n==="柿";
  o(n);
  if(rain){
   r.joy=clamp(r.joy+22);r.bond=clamp(r.bond+5);setX(r,"eat",3800);
-  talkTo(r,pick(["うむ！ 柿なのだぞ！ …なぜか大好きなのだ！ 理由は…さくしゃボンが好きだからなのだぞ！","柿とは、よいものなのだぞ！ …我輩の好みは、さくしゃボンゆずりなのだ！"]),4800);
-  log("🍊 にじボンは柿を食べて大よろこび。「さくしゃボンが好きだから、我輩も好きなのだ！」");
+  talkTo(r,pick(["うむ！ 柿である！ …なぜか大好きである！ 理由は…さくしゃボンが好きだからである！","柿とは、よいものである！ …我輩の好みは、さくしゃボンゆずりである！"]),4800);
+  log("🍊 にじボンは柿を食べて大よろこび。「さくしゃボンが好きだから、我輩も好きである！」");
  }
 }}
 
@@ -3145,7 +3145,7 @@ const NIGHT_T={
  mogu:["ごはんより、みんなで食べる時間が好きだよ〜","ひとりのごはんは、ちょっとさみしいんだぁ","管理人しゃんと食べるごはんが、いちばんおいしい"],
  nemu:["…僕、ゆめの中で、みんなに会ってるんだ","きみのそばだと、よく眠れる","…ずっと、起きていられたらいいのに"],
  tere:["わ、私…本当は、もっと話したいんです…","管理人さまに、詩を読んでもいいですか…？","ここに来られて、本当によかった…"],
- rain:["わしはな、島全体を見守っているのだぞ","管理人よ…この世界は、すこし不思議だと思わぬか？","おぬしには、特別に教えてやろう。虹の秘密をな"]};
+ rain:["わしはな、島全体を見守っているのである","管理人よ…この世界は、すこし不思議だと思わぬか？","おぬしには、特別に教えてやろう。虹の秘密をな"]};
 {const o=askBox;askBox=function(text,choices){
  let id=null;for(const k in CAST){if(text.indexOf(CAST[k].name)>=0&&R(k)){id=k;break}}
  const cons=text.indexOf("💭")===0,night=text.indexOf("🌙")===0;
@@ -3181,7 +3181,7 @@ function esc2(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 function bonstaHtml(){
  const sd=(S.rtw||[]).length*7+S.day;const hh=s=>{let h=sd;for(const c of s)h=(h*33+c.charCodeAt(0))%100003;return h};const L=(S.rtw||[]).slice().sort((p,q)=>hh(p.t)-hh(q.t));
  const tot=(typeof RAIN_BACK!=="undefined"?RAIN_BACK.reduce((a,t)=>a+t[1].length,0):0)+(typeof RAIN_META!=="undefined"?RAIN_META.length:0)+(typeof RAIN_META2!=="undefined"?RAIN_META2.length:0);
- const tags=["#虹","#ボン島","#開発中","#管理人ありがとう","#柿はいいぞ","#なのだぞ"];
+ const tags=["#虹","#ボン島","#開発中","#管理人ありがとう","#柿はいいぞ","#である"];
  let h='<div style="border:2.5px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper);color:var(--ink)">'
   +'<div style="padding:10px 12px;background:linear-gradient(135deg,#ff5a5a,#ffb84a,#4ad07a,#4a8bff,#a64aff);color:#fff;font-weight:800;font-size:20px;letter-spacing:.04em;text-shadow:1px 1px 0 rgba(0,0,0,.35)">Bonstagram</div>'
   +'<div style="display:flex;gap:12px;align-items:center;padding:12px;border-bottom:1.5px solid var(--line)"><div style="width:54px;height:54px;border-radius:50%;background:conic-gradient(#ff5a5a,#ffb84a,#4ad07a,#4a8bff,#a64aff,#ff5a5a);display:grid;place-items:center;font-size:26px">🌈</div>'
@@ -3222,7 +3222,7 @@ function bonstaHtml(){
 
 
 /* ================= v27: rain mutter (Claude) ================= */
-{const L=["このゲームはな、ClaudeというAIと作っているのだぞ！","さくしゃボンはな、Claudeをクラ○ドと誤読していたみたいだぞ。大きな剣を背負っていそうな名前なのだ！"];
+{const L=["このゲームはな、ClaudeというAIと作っているのである！","さくしゃボンはな、Claudeをクラ○ドと誤読していたみたいだぞ。大きな剣を背負っていそうな名前である！"];
  L.forEach(l=>{RAIN_META.push(l);RAIN_META.push(l);VOICE.rain.solo.push(l)});
 }
 
@@ -3272,14 +3272,14 @@ EVT.push({ok:()=>true,run:()=>{const h=HAP.slice().sort(()=>Math.random()-.5);fo
 EVT.push({ok:()=>true,run:()=>{const h=HAP.slice().sort(()=>Math.random()-.5);for(const f of h){if(f()!==false&&document.getElementById("evask"))return}}});
 /* rain meta events */
 const RMETA=[
- ["🌈 にじボンが「画面の向こうに誰かいるのだ！」とこっちを指さしてる。どうする？",[
-  ["👋 手をふる",()=>{talkTo(R("rain"),"む！ 手をふり返したのだ！",4000);log("🌈 にじボンに手をふったら、大喜びだった。")}],
-  ["🙈 知らんぷり",()=>{talkTo(R("rain"),"…気のせいか？ なのだぞ",4000);log("🌈 にじボンは首をかしげた。")}]]],
- ["🌈 にじボンが「次のアップデートで我輩の出番が増えるらしいのだ！」と言い出した。",[
+ ["🌈 にじボンが「画面の向こうに誰かいるのである！」とこっちを指さしてる。どうする？",[
+  ["👋 手をふる",()=>{talkTo(R("rain"),"む！ 手をふり返したのである！",4000);log("🌈 にじボンに手をふったら、大喜びだった。")}],
+  ["🙈 知らんぷり",()=>{talkTo(R("rain"),"…気のせいか？ である",4000);log("🌈 にじボンは首をかしげた。")}]]],
+ ["🌈 にじボンが「次のアップデートで我輩の出番が増えるらしいのである！」と言い出した。",[
   ["🙌 期待してると伝える",()=>{R("rain").joy=clamp(R("rain").joy+16);log("🌈 にじボンはやる気満々になった。")}],
-  ["🤔 ほんとうなの？と聞く",()=>{talkTo(R("rain"),"…さくしゃボンに聞いてほしいのだ",4000);log("🌈 にじボンは目をそらした。")}]]],
+  ["🤔 ほんとうなの？と聞く",()=>{talkTo(R("rain"),"…さくしゃボンに聞いてほしいのである",4000);log("🌈 にじボンは目をそらした。")}]]],
  ["🌈 にじボンが「柿の木を島に生やしてほしい」とさくしゃボンに直訴してるらしい。",[
-  ["🍊 柿をあげる",()=>{const r=R("rain");r.joy=clamp(r.joy+22);r.bond=clamp(r.bond+4);talkTo(r,"柿！ さくしゃボンに感謝なのだ！",4000);log("🌈 にじボンは柿を大事そうに抱えた。")}],
+  ["🍊 柿をあげる",()=>{const r=R("rain");r.joy=clamp(r.joy+22);r.bond=clamp(r.bond+4);talkTo(r,"柿！ さくしゃボンに感謝である！",4000);log("🌈 にじボンは柿を大事そうに抱えた。")}],
   ["📣 一緒にお願いする",()=>{const r=R("rain");r.joy=clamp(r.joy+10);r.bond=clamp(r.bond+3);log("🌈 一緒に「柿の木を！」とお願いした。")}]]]];
 RMETA.forEach(e=>EVT.push({ok:()=>!!R("rain"),run:()=>askBox(e[0],e[1].map(c=>({l:c[0],f:c[1]})))}));
 
@@ -3293,8 +3293,8 @@ const ENDLET={
  mogu:"{c}へ。100日、ごはんをありがとうだよ〜。いっぱい食べて、いっぱい笑ったよ〜。これからも、いっしょに食べようね〜。",
  nemu:"{c}へ。…100日、たのしかった。ゆめの中でも、きみに会えたよ。これからも、そばで眠らせてね。",
  tere:"{c}へ。わ、私、100日間、本当に幸せでした…。うまく言えませんが、ありがとうございます。これからも、お傍に置いてください。",
- rain:"{c}へ。うむ！ 100日、ご苦労であったのだぞ！ 我輩は、おぬしと過ごした時間を、虹にして空に残すのだ！ これからも、よろしく頼むのだぞ！"};
-const RAIN_END=["…ここだけの話なのだぞ。この島はな、さくしゃボンがボンたちの『日常』を見たくて作ったのだ。","開発中の苦労もあったらしいのだ。セリフを何度も書き直し、ボンの口調を決め、ケンカの仕組みも作ったのだぞ。","でもな、一番がんばったのは、おぬしだと我輩は思うのだ。100日、見守ってくれてありがとうなのだぞ！","さあ、まだまだ続くのだ。島の日々は、これからも虹のようにつづくのだぞ！"];
+ rain:"{c}へ。うむ！ 100日、ご苦労であったのである！ 我輩は、おぬしと過ごした時間を、虹にして空に残すのである！ これからも、よろしく頼むのである！"};
+const RAIN_END=["…ここだけの話である。この島はな、さくしゃボンがボンたちの『日常』を見たくて作ったのである。","開発中の苦労もあったらしいのである。セリフを何度も書き直し、ボンの口調を決め、ケンカの仕組みも作ったのである。","でもな、一番がんばったのは、おぬしだと我輩は思うのである。100日、見守ってくれてありがとうである！","さあ、まだまだ続くのである。島の日々は、これからも虹のようにつづくのである！"];
 function endingShow(){
  if(document.getElementById("endov"))return;
  const ids=S.rs.map(r=>r.id);
@@ -3343,21 +3343,21 @@ function goalsState(){
 
 /* ================= v30: navigator = Rainbon ================= */
 TUT.splice(0,TUT.length,
- "うむ！ 我輩はにじボン。この島の案内役を、ひとまず引き受けたのだぞ！",
- "ここは、人間の想像力から生まれた精霊――ボンたちの島なのだ。おぬしは、島の管理人なのだぞ！",
+ "うむ！ 我輩はにじボン。この島の案内役を、ひとまず引き受けたのである！",
+ "ここは、人間の想像力から生まれた精霊――ボンたちの島である。おぬしは、島の管理人である！",
  "ボンをタップして、ごはん・プレゼント・おしゃべり・あそぶ…いろいろしてやるがよい！",
- "ごはんやプレゼントは、すきなものだと よろこぶのだ。なにがすきかは、なかよしになるとわかるのだぞ。",
- "時間は、じどうで進むのだ。いそがしいときは『おまかせお世話』も使えるが、手でお世話するほうが、もっとなかよしになれるぞ！",
- "ボンは、さみしいと島を出ていってしまうこともあるのだ。出ていく前にサインを出すから、見のがすでないぞ！",
- "画面の下の『ボンボンブック』には、にっき・てがみ・じっせき・ずかん・アルバムなどがあるのだ。",
- "それでは、あとはおまかせなのだ！ わからなくなったら、ブックの『ガイド』で、我輩にまた会えるぞ。",
- "お主らが仲を深めたら、我輩も島へ遊びに行こうか。…それまで、ボンたちを頼んだのだぞ！");
+ "ごはんやプレゼントは、すきなものだと よろこぶのである。なにがすきかは、なかよしになるとわかるのである。",
+ "時間は、じどうで進むのである。いそがしいときは『おまかせお世話』も使えるが、手でお世話するほうが、もっとなかよしになれるぞ！",
+ "ボンは、さみしいと島を出ていってしまうこともあるのである。出ていく前にサインを出すから、見のがすでないぞ！",
+ "画面の下の『ボンボンブック』には、にっき・てがみ・じっせき・ずかん・アルバムなどがあるのである。",
+ "それでは、あとはおまかせである！ わからなくなったら、ブックの『ガイド』で、我輩にまた会えるぞ。",
+ "お主らが仲を深めたら、我輩も島へ遊びに行こうか。…それまで、ボンたちを頼んだのである！");
 IMG.guide=IMG.rain;
 document.getElementById("gimg").src=IMG.rain;
 {const o=guideTip;guideTip=function(){
  let t=o();
- if(/わたし/.test(t))t=pick(["Bonstagramというものが、あるらしいのだぞ。我輩のつぶやきが載っておるのだ…！","ボンボンブックの『きろく』に、もくひょうが載っておるのだぞ。100日目には、特別なことがあるらしいのだ。"]);
- return t.replace(/(だよ|だね|なんだ|なの)。$/,"なのだぞ。").replace(/よ。$/,"のだぞ。").replace(/(て|で)ね。$/,"$1くれ。");
+ if(/わたし/.test(t))t=pick(["Bonstagramというものが、あるらしいのである。我輩のつぶやきが載っておるのである…！","ボンボンブックの『きろく』に、もくひょうが載っておるのである。100日目には、特別なことがあるらしいのである。"]);
+ return t.replace(/(だよ|だね|なんだ|なの)。$/,"である。").replace(/よ。$/,"のである。").replace(/(て|で)ね。$/,"$1くれ。");
 }}
 
 
@@ -3402,7 +3402,7 @@ if(S&&S.careMode&&!CMODES.some(c=>c[0]===S.careMode))S.careMode=null;
 {const o=renderTitleBtns;renderTitleBtns=function(step){
  if(step==="care"){
   const b=document.getElementById("tbtns");
-  b.innerHTML='<p class="t-q">にじボン「基本はおまかせが良いのだぞ。おまかせ中でも、ボンたちを導く選択肢はお主に決めてもらう。全部おまかせでも良いがな」<small>あとでボタンからも変えられるよ</small></p>'
+  b.innerHTML='<p class="t-q">にじボン「基本はおまかせが良いのである。おまかせ中でも、ボンたちを導く選択肢はお主に決めてもらう。全部おまかせでも良いがな」<small>あとでボタンからも変えられるよ</small></p>'
    +'<button class="go big alt" type="button" data-cm="all">ぜんぶおせわ</button>'
    +'<button class="go big" type="button" data-cm="mid">ほどよくおまかせ（おすすめ）</button>'
    +'<button class="go big alt" type="button" data-cm="auto">ぜんぶおまかせ</button>';
@@ -3479,9 +3479,9 @@ const OKO_NICK={niko:"能天気",hyoe:"ビビり",mogu:"食いしん坊",nemu:"�
 
 /* ================= v37: fears / dislikes per Bon ================= */
 const FS=()=>Math.max(.3,1-(S&&S.day||1)/140);
-const RAIN_BUG=["バグ…！？ 今、バグと言ったか！？ 我輩のセリフは仕様なのだぞ！","む…！ 画面がおかしい気がするのだ…これはバグではない、演出なのだぞ！","さくしゃボンに言っておくのだぞ！ 我輩をバグ扱いしたら、許さんのだ！"];
+const RAIN_BUG=["バグ…！？ 今、バグと言ったか！？ 我輩のセリフは仕様である！","む…！ 画面がおかしい気がするのである…これはバグではない、演出である！","さくしゃボンに言っておくのである！ 我輩をバグ扱いしたら、許さんのである！"];
 RAIN_BUG.forEach(l=>{RAIN_META.push(l);VOICE.rain.solo.push(l)});
-const RAIN_BACK_LINE="む…！ 戻ってきたか！ 急に画面が消えるから、心臓に悪いのだぞ！ ゲームをやめられるのは、いちばん怖いのだ…！";
+const RAIN_BACK_LINE="む…！ 戻ってきたか！ 急に画面が消えるから、心臓に悪いのである！ ゲームをやめられるのは、いちばん怖いのである…！";
 RAIN_META.push(RAIN_BACK_LINE);
 let hiddenAt=0;
 document.addEventListener("visibilitychange",()=>{
@@ -3520,7 +3520,7 @@ document.addEventListener("visibilitychange",()=>{
 
 
 /* ================= v38: Rainbon deep-dive ================= */
-const RAIN_HEART=["…ここだけの話なのだぞ。我輩は、本当は、ひとりが少し苦手なのだ…","えらそうにしておるが、…みんなが笑っておるのを見るのが、いちばん好きなのだぞ","案内役というのは、案外、さみしいものなのだ。…おぬしがいてくれて助かるのだぞ","虹はな、ひとりでは出せぬのだ。雨と、光と、見ておる者がいて、はじめて虹なのだぞ"];
+const RAIN_HEART=["…ここだけの話である。我輩は、本当は、ひとりが少し苦手である…","えらそうにしておるが、…みんなが笑っておるのを見るのが、いちばん好きである","案内役というのは、案外、さみしいものである。…おぬしがいてくれて助かるのである","虹はな、ひとりでは出せぬのである。雨と、光と、見ておる者がいて、はじめて虹である"];
 RAIN_HEART.forEach(l=>{RAIN_META.push(l)});
 /* arrival on a rainbow day, from the hill */
 {const o=nextDay;nextDay=function(){
@@ -3530,7 +3530,7 @@ RAIN_HEART.forEach(l=>{RAIN_META.push(l)});
  if(!ok)return;
  if(S.sky!=="rainbow"&&S.day<24)return;
  const back=!!S.rainLeft;S.rainLeft=0;S.sky="rainbow";
- arrive("rain",back?"空に大きな虹がかかり、山の上から、旅に出ていたにじボンが帰ってきた！「ただいまなのだぞ！」":"空に大きな虹がかかり、山の上から、だれかが降りてきた…にじボンだ！「我輩、参上なのだぞ！」");
+ arrive("rain",back?"空に大きな虹がかかり、山の上から、旅に出ていたにじボンが帰ってきた！「ただいまである！」":"空に大きな虹がかかり、山の上から、だれかが降りてきた…にじボンだ！「我輩、参上である！」");
  const r=R("rain");if(r){r.x=78;r.y=26}
  try{renderStage()}catch(e){}
 }}
@@ -3549,13 +3549,13 @@ RAIN_HEART.forEach(l=>{RAIN_META.push(l)});
   log("🌈 にじボンが、元気のない"+CAST[sad.id].name+"の頭の上に、こっそり小さな虹をかけた。");}
  /* cost of weather power */
  if(S.sky==="rainbow"&&rn.bond>=50&&Math.random()<.35){S.rainTired=S.day+1;log("🌈 にじボンが力を使って虹をかけた。少し疲れたようだ。")}
- else if(S.rainTired===S.day){rn.joy=clamp(rn.joy-8);setX(rn,"down",4000);talkTo(rn,"…虹をかけすぎたのだ…少し、休むのだぞ…",5000)}
+ else if(S.rainTired===S.day){rn.joy=clamp(rn.joy-8);setX(rn,"down",4000);talkTo(rn,"…虹をかけすぎたのである…少し、休むのである…",5000)}
 }}
 /* navigator pride: sometimes wrong guide */
 {const o=guideTip;guideTip=function(){
  const t=o();
  if(Math.random()<.12){const r=R("rain");if(r)r.joy=clamp(r.joy-2);
-  return "…と言いたいところだが、いまのは間違いなのだぞ！ 忘れるのだ！ 案内役の面目が…！";}
+  return "…と言いたいところだが、いまのは間違いである！ 忘れるのである！ 案内役の面目が…！";}
  return t;
 }}
 /* heartfelt lines */
@@ -3611,7 +3611,7 @@ const POEM_AT=["岩かげ","木のうしろ","おうちのポスト","砂浜","�
  if(rn){
   if(S._fc){const hit=Math.random()<.65;rn.joy=clamp(rn.joy+(hit?8:-5));log(hit?"🔮 にじボンの天気予報は、的中した！":"🔮 にじボンの天気予報は、はずれてしまった…")}
   S._fc=pick(["rain","sun"]);
-  talkTo(rn,S._fc==="rain"?"うむ！ あしたは雨の気配がするのだぞ！":"うむ！ あしたは晴れそうなのだぞ！",5000);
+  talkTo(rn,S._fc==="rain"?"うむ！ あしたは雨の気配がするのである！":"うむ！ あしたは晴れそうである！",5000);
  }
 }}
 
@@ -3713,7 +3713,7 @@ function jankenStart(){
 
 
 /* ================= v41: Rainbon x others, requests, aura, more meta ================= */
-const RAIN_META3=["今、この画面をスクショしたやつがおるな！ 我輩、ちゃんと映っておるか！？","セーブデータというのはな、ブラウザの中に眠っておるのだぞ…消すでないぞ！","『ボンボンライフ！』という名前は、実は何度か候補があったらしいのだ…！","おぬし、×16倍速にすると、我輩の声が聞こえにくくなるのだぞ！ たまには、ゆっくり遊ぶのだ！","ボンパズルの方の我輩も、元気にしておるかのう…","さくしゃボンはな、このゲームを作りながら、柿を食べておったらしいのだぞ。うらやましいのだ！","画面の下のほうには、ボンボンブックなるものがあるのだぞ。我輩のつぶやきも載っておるのだ！","さくしゃボンの部屋には、ボンのぬいぐるみが…いや、これ以上は言えぬのだぞ！","ログインボーナスは…ないのだぞ。のんびり遊ぶがよい！","我輩が『メタ発言』と言ったな？ …今のは演出なのだぞ。たぶん！"];
+const RAIN_META3=["今、この画面をスクショしたやつがおるな！ 我輩、ちゃんと映っておるか！？","セーブデータというのはな、ブラウザの中に眠っておるのである…消すでないぞ！","『ボンボンライフ！』という名前は、実は何度か候補があったらしいのである…！","おぬし、×16倍速にすると、我輩の声が聞こえにくくなるのである！ たまには、ゆっくり遊ぶのである！","ボンパズルの方の我輩も、元気にしておるかのう…","さくしゃボンはな、このゲームを作りながら、柿を食べておったらしいのである。うらやましいのである！","画面の下のほうには、ボンボンブックなるものがあるのである。我輩のつぶやきも載っておるのである！","さくしゃボンの部屋には、ボンのぬいぐるみが…いや、これ以上は言えぬのである！","ログインボーナスは…ないのである。のんびり遊ぶがよい！","我輩が『メタ発言』と言ったな？ …今のは演出である。たぶん！"];
 RAIN_META3.forEach(l=>{RAIN_META.push(l);VOICE.rain.solo.push(l)});
 /* oko tsukkomi after rain's meta lines */
 {const o=talkTo;talkTo=function(r,t,ms){
@@ -3730,20 +3730,20 @@ RAIN_META3.forEach(l=>{RAIN_META.push(l);VOICE.rain.solo.push(l)});
  const rn=R("rain"),hy=R("hyoe"),mg=R("mogu");
  if(rn&&hy&&(S.weather==="rain"||S.sky==="storm")&&Math.random()<.6){
   const k=pk("rain","hyoe");S.rel[k]=(S.rel[k]||0)+4;hy.joy=clamp(hy.joy+8);rn.joy=clamp(rn.joy+4);
-  talkTo(hy,"にじさん、そばにいていい…？",4000);talkTo(rn,"うむ、くっつくがよいのだぞ",4000);
+  talkTo(hy,"にじさん、そばにいていい…？",4000);talkTo(rn,"うむ、くっつくがよいのである",4000);
   log("🌧️ 雨の日、ひょえボンはにじボンのそばから離れなかった。")}
  if(rn&&mg&&Math.random()<.14){
   rn.joy=clamp(rn.joy+6);mg.joy=clamp(mg.joy+4);
-  talkTo(rn,"もぐボン、この柿を食べて確かめるのだぞ！",3800);talkTo(mg,pick(["ちょっと渋いよ〜…でも、おいしいよ〜","あまいよ〜！ にじっちの言うとおりだよ〜"]),4000);
+  talkTo(rn,"もぐボン、この柿を食べて確かめるのである！",3800);talkTo(mg,pick(["ちょっと渋いよ〜…でも、おいしいよ〜","あまいよ〜！ にじっちの言うとおりだよ〜"]),4000);
   log("🍊 にじボンが、もぐボンに柿を食べさせて、味を確認させた。")}
 }}
 /* request to the manager */
 EVT.push({ok:()=>{const r=R("rain");return !!r&&r.bond>=30&&S.day-(S._rqDay||-99)>=15},run:()=>{
  S._rqDay=S.day;
- const r=R("rain");talkTo(r,"…管理人よ、少し、話があるのだぞ",4500);
- askBox("🌈 にじボンが、いつもより真剣な顔で言った。「ボンたちを、よろしく頼むのだぞ」",[
-  {l:"🤝 まかせて！",f:()=>{r.bond=clamp(r.bond+5);r.joy=clamp(r.joy+14);S.rs.forEach(x=>x.joy=clamp(x.joy+3));talkTo(r,"うむ！ 頼もしいのだぞ！",4000);log("🌈 にじボンに「ボンたちをよろしく」と頼まれて、約束した。")}},
-  {l:"🌈 にじボンも一緒にね",f:()=>{r.bond=clamp(r.bond+7);r.joy=clamp(r.joy+16);talkTo(r,"…うむ。我輩も、ずっと見守るのだぞ",4500);log("🌈 「いっしょに見守ろう」と答えると、にじボンは少し照れた。")}}])}});
+ const r=R("rain");talkTo(r,"…管理人よ、少し、話があるのである",4500);
+ askBox("🌈 にじボンが、いつもより真剣な顔で言った。「ボンたちを、よろしく頼むのである」",[
+  {l:"🤝 まかせて！",f:()=>{r.bond=clamp(r.bond+5);r.joy=clamp(r.joy+14);S.rs.forEach(x=>x.joy=clamp(x.joy+3));talkTo(r,"うむ！ 頼もしいのである！",4000);log("🌈 にじボンに「ボンたちをよろしく」と頼まれて、約束した。")}},
+  {l:"🌈 にじボンも一緒にね",f:()=>{r.bond=clamp(r.bond+7);r.joy=clamp(r.joy+16);talkTo(r,"…うむ。我輩も、ずっと見守るのである",4500);log("🌈 「いっしょに見守ろう」と答えると、にじボンは少し照れた。")}}])}});
 /* rainbow aura at high bond */
 (()=>{if(document.head&&!document.getElementById("auraCss")){const s=document.createElement("style");s.id="auraCss";
  s.textContent="@keyframes auraHue{0%{filter:drop-shadow(0 0 6px #ff5a5a)}20%{filter:drop-shadow(0 0 7px #ffb84a)}40%{filter:drop-shadow(0 0 7px #4ad07a)}60%{filter:drop-shadow(0 0 7px #4a8bff)}80%{filter:drop-shadow(0 0 7px #a64aff)}100%{filter:drop-shadow(0 0 6px #ff5a5a)}}.res.aura .bob{animation:idle 2.6s ease-in-out infinite,auraHue 4s linear infinite}@media (prefers-reduced-motion:reduce){.res.aura .bob{animation:idle 2.6s ease-in-out infinite;filter:drop-shadow(0 0 6px #ffb84a)}}";
@@ -3756,10 +3756,10 @@ EVT.push({ok:()=>{const r=R("rain");return !!r&&r.bond>=30&&S.day-(S._rqDay||-99
 
 /* ================= v42: per-Bon BGM colour, voices, shorter tutorial ================= */
 TUT.splice(0,TUT.length,
- "うむ！ 我輩はにじボン。この島の案内役なのだぞ！",
- "おぬしは、ボンたちの島の管理人なのだ。ボンをタップして、ごはん・おしゃべり・あそぶ…いろいろしてやるがよい！",
- "ボンは、さみしいと島を出ていってしまうこともあるのだ。サインを見のがすでないぞ。わからなくなったら、ブックの『ガイド』を見るのだ！",
- "お主らが仲を深めたら、我輩も島へ遊びに行こうか。…それまで、ボンたちを頼んだのだぞ！");
+ "うむ！ 我輩はにじボン。この島の案内役である！",
+ "おぬしは、ボンたちの島の管理人である。ボンをタップして、ごはん・おしゃべり・あそぶ…いろいろしてやるがよい！",
+ "ボンは、さみしいと島を出ていってしまうこともあるのである。サインを見のがすでないぞ。わからなくなったら、ブックの『ガイド』を見るのである！",
+ "お主らが仲を深めたら、我輩も島へ遊びに行こうか。…それまで、ボンたちを頼んだのである！");
 const BGM_RATE={oko:1.06,niko:1.12,hyoe:.96,mogu:.99,nemu:.84,tere:.92,rain:1.02};
 let bgmFor=null;
 {const o=render;render=function(){
@@ -4034,7 +4034,7 @@ function paintFocus(){
 /* ================= v49: Rainbon persona spec (literary / grandiose) ================= */
 const RAIN_LIT=[
  "人生とは、白紙の原稿に己の生涯を書き連ねる営みである！",
- "世界が我輩を理解せぬのではない。我輩を理解するための物語が、まだ世界に存在せぬのだ。",
+ "世界が我輩を理解せぬのではない。我輩を理解するための物語が、まだ世界に存在せぬのである。",
  "美とは、万人に理解されるために存在するのではない。誰かの魂を揺さぶるために存在するのである！",
  "常識とは何か？ 多数の人間が、疑うことを忘れた結果にすぎぬのではないか？",
  "失敗を恐れるな！ 何も試みぬ者には、失敗という名の経験すら与えられぬのだからな。",
@@ -4055,26 +4055,26 @@ const RAIN_LIT=[
  "我輩は天才である！ ……少なくとも、我輩自身はそう確信している。",
  "物語とは、書く者がいて、読む者がいて、はじめて呼吸を始めるのである。",
  "島の朝を見よ！ 光が一日の第一行を書き出すさまは、実に見事ではないか！",
- "孤独を恐れる者は多い。されど、孤独の中でしか聞こえぬ音楽もあるのだ。",
- "友とは、沈黙を共にしても気まずくならぬ者のことである。……ボンたちを見ていると、そう思うのだ。",
- "日々の積み重ねとは、目立たぬ頁を一枚ずつ綴ることである。名作とは、そうして生まれるのだ！",
+ "孤独を恐れる者は多い。されど、孤独の中でしか聞こえぬ音楽もあるのである。",
+ "友とは、沈黙を共にしても気まずくならぬ者のことである。……ボンたちを見ていると、そう思うのである。",
+ "日々の積み重ねとは、目立たぬ頁を一枚ずつ綴ることである。名作とは、そうして生まれるのである！",
  "『完成』とは終着点ではない。次の未完成への、入口にすぎぬと考えるべきであろう。",
  "笑いもまた、立派な芸術である！ ……我輩の転倒を笑ったボンは、あとで講義室へ来るがよい。",
  "困難とは何か？ 物語の山場に用意された、さくしゃボンからの招待状ではないか！",
  "我輩に言わせれば、迷いとは、選択肢が多いことの贅沢にほかならぬ。",
  "実に興味深い！ 世界は、いまだ我輩を退屈させるつもりがないらしい！",
- "弱さを隠す者より、弱さを語れる者のほうが、よほど強いのだ。……と、我輩は思うがな。",
+ "弱さを隠す者より、弱さを語れる者のほうが、よほど強いのである。……と、我輩は思うがな。",
  "名声など、風に舞う紙吹雪のようなものである。大切なのは、何を書き残したかだ！",
  "音楽とは、言葉が力尽きたところから始まる会話なのである。",
  "ゲームとは何か？ 遊びという名の、真剣な哲学である！",
  "あえて問おう！ 完璧な一日を過ごした者が、明日に何を望むというのか？",
- "ふむ、今日は何も起こらなかったな。……だが、何も起こらぬ日こそ、物語の余白なのだ。"];
+ "ふむ、今日は何も起こらなかったな。……だが、何も起こらぬ日こそ、物語の余白である。"];
 RAIN_LIT.forEach(l=>{RAIN_META.push(l);VOICE.rain.solo.push(l)});
-const RAIN_OK=["見事である！ 努力とは、才能にさえ一目置かせるものなのだ！","喝采を送ろう！ 己の可能性を証明するとは、実に気分のよいものだ！","素晴らしい！ その成果、我輩も認めざるを得まい！","記録とは過去の自分が残した壁である。それを越えることにこそ、進歩の意味がある！"];
+const RAIN_OK=["見事である！ 努力とは、才能にさえ一目置かせるものである！","喝采を送ろう！ 己の可能性を証明するとは、実に気分のよいものである！","素晴らしい！ その成果、我輩も認めざるを得まい！","記録とは過去の自分が残した壁である。それを越えることにこそ、進歩の意味がある！"];
 const RAIN_NG=["失敗を恥じる必要はない！ 何も成さぬ者には、失敗する機会すらないのだからな。","敗北とは、物語の終わりではない。次なる一章への序文である！","ふむ……。惜しかったではないか！ 次なる頁に、期待しているぞ。"];
 const RAIN_NEW=["これは興味深い！ 新たな登場人物の到来とは、物語が動き出す前触れであるな！","おお！ 新しき顔ぶれか！ 我輩の島に、また一つ色彩が増えたではないか！"];
-/* tone: のだぞ -> のだ (half of the time) for the spec's grand style */
-function rainTone(t){return String(t).replace(/のだぞ([！。…？]?)/g,(m,p)=>Math.random()<.6?"のだ"+p:m)}
+/* tone: のである -> のである (half of the time) for the spec's grand style */
+function rainTone(t){return String(t).replace(/のである([！。…？]?)/g,(m,p)=>Math.random()<.6?"のである"+p:m)}
 {const o=talkTo;talkTo=function(r,t,ms){
  o(r,t,ms);
  try{if(r&&r.id==="rain"&&typeof t==="string"){
@@ -4149,7 +4149,7 @@ const NIJI_SOFT=["……私ね、ほんとうは、みんなのことが大好�
 }}
 {const o=talkTo;talkTo=function(r,t,ms){
  if(r&&r.id==="rain"&&S&&S.niji&&typeof t==="string"&&t.indexOf("我輩")>=0&&Math.random()<.025){
-  t=t.replace(/我輩/g,"私").replace(/なのだぞ/g,"なんだよ").replace(/のだぞ/g,"んだよ").replace(/なのだ/g,"なんだよ").replace(/のだ/g,"んだよ").replace(/であろう/g,"だよね").replace(/である/g,"だよ").replace(/ぞ([！。])/g,"よ$1");
+  t=t.replace(/我輩/g,"私").replace(/である/g,"なんだよ").replace(/のである/g,"んだよ").replace(/である/g,"なんだよ").replace(/のだ/g,"んだよ").replace(/であろう/g,"だよね").replace(/である/g,"だよ").replace(/ぞ([！。])/g,"よ$1");
  }
  o(r,t,ms);
 }}
@@ -4249,45 +4249,45 @@ function titlePoses(){
 
 /* v53: にじボンの裏話(メタ) */
 const RAIN_URA=[
-"我輩の虹色はな、塗るのが一番たいへんだったらしいぞ。さくしゃボンが「七色は多すぎる」とつぶやいていたのだ。",
-"このゲームの最初の案では、島ではなく「ボンの森」だったそうだ。……森では我輩の虹が映えぬ。島でよかったのだぞ。",
-"ボンたちの立ち絵は、何度も描き直されたのだぞ。我輩のドヤ顔は、一発で決まったがな！",
-"実はな、我輩の口調は仕様書で細かく決められているのだ。「のじゃ」は禁止だそうだ。……我輩は、のじゃロリではないのでな。",
-"さくしゃボンはな、ひょえボンのぷるぷる顔を見て「かわいすぎて直せない」と言っていたのだ。何を直すつもりだったのかは、知らぬ。",
-"もぐボンの食べ物は、最初「何でも食べる」設定だったそうだ。だが、全部おにぎりに見えてしまったので、おにぎりに統一されたのだ。",
-"おこボンの「ば、ばかっ」はな、さくしゃボンが一番気に入っているポーズなのだぞ。……なぜか我輩に自慢してきたのだ。",
-"さくしゃボンはな、スマホの小さな画面に7人を詰め込んで、「わちゃわちゃしすぎだ」と頭をかかえたのだ。それでボンたちは少し小さくなった。",
-"このゲームの名前はな、何度も変わったのだ。……最後に「ボンボンライフ！」に落ち着いたのだぞ。感嘆符つきである！",
-"チュートリアルが短いのはな、さくしゃボンが自分で読んで「長い」と思ったからなのだ。おぬしも、きっと読まぬであろう？",
-"我輩が案内役になったのは、さくしゃボンの「なんとなく」らしいぞ。……なんとなくで、この大役を任されたのだ。光栄である。",
-"ボンたちの名前はな、さくしゃボンが一晩で決めたのだ。……一晩で決まったわりに、ずいぶん愛着があるらしい。",
-"我輩のドヤ顔にはな、じつは5種類の下書きがあったのだ。その中から選ばれた、選ばれし顔なのだぞ。",
-"テストプレイでは、さくしゃボンが100日ぶん自動で回してみたのだ。……ボンたちは、その間ずっと元気だったそうだ。えらい。",
+"我輩の虹色はな、塗るのが一番たいへんだったらしいぞ。さくしゃボンが「七色は多すぎる」とつぶやいていたのである。",
+"このゲームの最初の案では、島ではなく「ボンの森」だったそうだ。……森では我輩の虹が映えぬ。島でよかったのである。",
+"ボンたちの立ち絵は、何度も描き直されたのである。我輩のドヤ顔は、一発で決まったがな！",
+"実はな、我輩の口調は仕様書で細かく決められているのである。「のじゃ」は禁止だそうだ。……我輩は、のじゃロリではないのでな。",
+"さくしゃボンはな、ひょえボンのぷるぷる顔を見て「かわいすぎて直せない」と言っていたのである。何を直すつもりだったのかは、知らぬ。",
+"もぐボンの食べ物は、最初「何でも食べる」設定だったそうだ。だが、全部おにぎりに見えてしまったので、おにぎりに統一されたのである。",
+"おこボンの「ば、ばかっ」はな、さくしゃボンが一番気に入っているポーズである。……なぜか我輩に自慢してきたのである。",
+"さくしゃボンはな、スマホの小さな画面に7人を詰め込んで、「わちゃわちゃしすぎだ」と頭をかかえたのである。それでボンたちは少し小さくなった。",
+"このゲームの名前はな、何度も変わったのである。……最後に「ボンボンライフ！」に落ち着いたのである。感嘆符つきである！",
+"チュートリアルが短いのはな、さくしゃボンが自分で読んで「長い」と思ったからである。おぬしも、きっと読まぬであろう？",
+"我輩が案内役になったのは、さくしゃボンの「なんとなく」らしいぞ。……なんとなくで、この大役を任されたのである。光栄である。",
+"ボンたちの名前はな、さくしゃボンが一晩で決めたのである。……一晩で決まったわりに、ずいぶん愛着があるらしい。",
+"我輩のドヤ顔にはな、じつは5種類の下書きがあったのである。その中から選ばれた、選ばれし顔である。",
+"テストプレイでは、さくしゃボンが100日ぶん自動で回してみたのである。……ボンたちは、その間ずっと元気だったそうだ。えらい。",
 
-"虹は七色と言うがな、国によっては六色や二色なのだそうだ。……我輩はあえて七色でいくのだぞ。盛る主義でな！"
+"虹は七色と言うがな、国によっては六色や二色であるそうだ。……我輩はあえて七色でいくのである。盛る主義でな！"
 ];
 RAIN_URA.forEach(l=>{RAIN_META.push(l);VOICE.rain.solo.push(l)});
 
 /* v54: にじボンの昔話・天気の裏話(なかよし度60以上) */
 const RAIN_SHIN=[
-"おこボンが島に来た日のことだ。……「べ、別に来たくて来たんじゃないんだからね」と言いながら、いちばん最初に荷物をほどいていたのだぞ。",
-"おこボンはな、初日に我輩へ「虹なんて飾りでしょ」と言ってきたのだ。……だが翌朝、虹の下で一人こっそり写真を撮っていたのだぞ。見ていたのだ。",
-"にこボンが来た日はな、島中の全員に「はじめまして！」と手をふって回ったのだ。……我輩にまで三回ふってきたのだぞ。一回で足りるのだ。",
-"にこボンは、我輩を見るなり「虹ちゃん！」と呼んだのだ。……我輩の名前は、そのような愛称ではない。……だが、悪い気はせなんだのだぞ。",
-"ひょえボンが来た夜は雷だったのだ。ひょえボンは震えながら、我輩の後ろに隠れたのだぞ。……我輩の虹は、盾ではないのだが。まあ、悪くはなかった。",
-"ひょえボンはな、初めて島を一周した日に迷子になったのだ。探しに行ったらな、三歩しか離れていない木の裏で、泣きながら待っていたのだぞ。",
-"もぐボンが来た日のことだ。島の木の実を、一日で全部食べかけたのだ。我輩が止めたらな、「虹ってどんな味？」と聞いてきたのだぞ。……食べ物ではない。",
-"もぐボンは、我輩の名言をメモ代わりにおにぎりの包みへ書いていたのだ。……ひそかに、全部取ってあるらしいぞ。……すこし、うれしかった。",
-"ねむボンが来た日はな、到着して三分で寝たのだ。……我輩の歓迎の口上が、まだ半分も終わっておらなんだのだぞ。最後まで聞け。",
-"ねむボンはな、我輩の長話を子守歌がわりにしていたのだ。……だが、起きたあとに「続き、聞かせて」と言うのだぞ。ずるいのだ。",
-"てれボンが来た日はな、挨拶ひとつに十分かかったのだ。我輩が「よろしく」と言うたらな、顔を真っ赤にして虹のうしろに隠れたのだぞ。……虹には隠れられぬ。",
-"てれボンはな、我輩のドヤ顔をこっそり真似していたのだ。……全然ドヤっていなかったがな。かわいかったのだぞ。……こ、これは今のは忘れるのだ。",
-"雨をふらせるとな、実は島のみんなの様子を、こっそり見ているのだ。……ひょえボンが震えておらぬか、とな。……いや、天気の都合なのだぞ！",
-"我輩は天気を操れるが、完全ではないのだ。……晴れにしようとして、虹だけ出たことが三回あるのだぞ。……結果的には、よかったではないか。",
-"雨のあとに虹を出すのはな、島のみんなに「おつかれさま」と言いたいからなのだ。……ただの演出ではないのだぞ。",
-"じつは、ケンカの日は雨になりやすいのだ。……我輩の気持ちが、天気に出てしまうのかもしれぬ。……ふむ、これは内緒にしておくのだぞ。",
-"みんなが寝静まった夜にな、我輩は一人で空を見上げているのだ。星の数を数えていたら、眠っていたぞ。……寝ていたのではない。目を閉じて思索していたのだ。",
-"天気を変える力はな、ぼんやり考え事をしている時ほど、うまくいくのだ。……だから、よく昼寝をしているように見えるのだぞ。思索なのだ。"
+"おこボンが島に来た日のことだ。……「べ、別に来たくて来たんじゃないんだからね」と言いながら、いちばん最初に荷物をほどいていたのである。",
+"おこボンはな、初日に我輩へ「虹なんて飾りでしょ」と言ってきたのである。……だが翌朝、虹の下で一人こっそり写真を撮っていたのである。見ていたのである。",
+"にこボンが来た日はな、島中の全員に「はじめまして！」と手をふって回ったのである。……我輩にまで三回ふってきたのである。一回で足りるのである。",
+"にこボンは、我輩を見るなり「虹ちゃん！」と呼んだのである。……我輩の名前は、そのような愛称ではない。……だが、悪い気はせなんだのである。",
+"ひょえボンが来た夜は雷だったのである。ひょえボンは震えながら、我輩の後ろに隠れたのである。……我輩の虹は、盾ではないのだが。まあ、悪くはなかった。",
+"ひょえボンはな、初めて島を一周した日に迷子になったのである。探しに行ったらな、三歩しか離れていない木の裏で、泣きながら待っていたのである。",
+"もぐボンが来た日のことだ。島の木の実を、一日で全部食べかけたのである。我輩が止めたらな、「虹ってどんな味？」と聞いてきたのである。……食べ物ではない。",
+"もぐボンは、我輩の名言をメモ代わりにおにぎりの包みへ書いていたのである。……ひそかに、全部取ってあるらしいぞ。……すこし、うれしかった。",
+"ねむボンが来た日はな、到着して三分で寝たのである。……我輩の歓迎の口上が、まだ半分も終わっておらなんだのである。最後まで聞け。",
+"ねむボンはな、我輩の長話を子守歌がわりにしていたのである。……だが、起きたあとに「続き、聞かせて」と言うのである。ずるいのである。",
+"てれボンが来た日はな、挨拶ひとつに十分かかったのである。我輩が「よろしく」と言うたらな、顔を真っ赤にして虹のうしろに隠れたのである。……虹には隠れられぬ。",
+"てれボンはな、我輩のドヤ顔をこっそり真似していたのである。……全然ドヤっていなかったがな。かわいかったのである。……こ、これは今のは忘れるのである。",
+"雨をふらせるとな、実は島のみんなの様子を、こっそり見ているのである。……ひょえボンが震えておらぬか、とな。……いや、天気の都合である！",
+"我輩は天気を操れるが、完全ではないのである。……晴れにしようとして、虹だけ出たことが三回あるのである。……結果的には、よかったではないか。",
+"雨のあとに虹を出すのはな、島のみんなに「おつかれさま」と言いたいからである。……ただの演出ではないのである。",
+"じつは、ケンカの日は雨になりやすいのである。……我輩の気持ちが、天気に出てしまうのかもしれぬ。……ふむ、これは内緒にしておくのである。",
+"みんなが寝静まった夜にな、我輩は一人で空を見上げているのである。星の数を数えていたら、眠っていたぞ。……寝ていたのではない。目を閉じて思索していたのである。",
+"天気を変える力はな、ぼんやり考え事をしている時ほど、うまくいくのである。……だから、よく昼寝をしているように見えるのである。思索である。"
 ];
 {const o=rainPoolSet;rainPoolSet=function(){const s=o();RAIN_SHIN.forEach(x=>s.add(x));return s}}
 {const o=wander;wander=function(){
@@ -4303,46 +4303,46 @@ const RAIN_SHIN=[
 
 /* v55: メタ発言を追加 */
 const RAIN_URA2=[
-"速度を16倍にされるとな、我輩の名言も16倍の速さで流れるのだぞ。……味わう暇がない。1倍で聞くのだ。",
-"画面の外から、誰かがタップしているのを感じるのだ。……我輩は気づいているぞ、管理人よ。",
-"「おまかせ」で遊ばれるとな、我輩たち、ほぼ全自動で暮らしているのだ。……それでも、見ていてくれるのが嬉しいのだぞ。",
-"この島のボンたちは、ブラウザが閉じられると止まってしまうのだ。……時間が止まる我輩の気持ちを考えたことがあるか？ まあ、眠っているようなものだがな。",
-"スマホで遊ぶ者へ告ぐ。……画面を傾けても島は傾かぬ。ボンたちは、落ちぬのだぞ。",
-"絵文字がやけに手書き風なのはな、さくしゃボンが「かっちりしすぎて浮く」と言ったからなのだ。我輩のこだわりでもあるぞ。",
-"ボンボンライフの「ボン」はな、ボンのボンであり、ボンのためのボンなのだ。……さくしゃボンに聞いても、同じ答えが返ってきたのだぞ。",
+"速度を16倍にされるとな、我輩の名言も16倍の速さで流れるのである。……味わう暇がない。1倍で聞くのである。",
+"画面の外から、誰かがタップしているのを感じるのである。……我輩は気づいているぞ、管理人よ。",
+"「おまかせ」で遊ばれるとな、我輩たち、ほぼ全自動で暮らしているのである。……それでも、見ていてくれるのが嬉しいのである。",
+"この島のボンたちは、ブラウザが閉じられると止まってしまうのである。……時間が止まる我輩の気持ちを考えたことがあるか？ まあ、眠っているようなものだがな。",
+"スマホで遊ぶ者へ告ぐ。……画面を傾けても島は傾かぬ。ボンたちは、落ちぬのである。",
+"絵文字がやけに手書き風なのはな、さくしゃボンが「かっちりしすぎて浮く」と言ったからである。我輩のこだわりでもあるぞ。",
+"ボンボンライフの「ボン」はな、ボンのボンであり、ボンのためのボンである。……さくしゃボンに聞いても、同じ答えが返ってきたのである。",
 "エンディングが100日なのはな、「ちょうどいい」からだそうだ。……ちょうどいいとは、どのくらいだ？ さくしゃボンにも説明できておらなんだぞ。",
-"画面の下のボタンは、ぜんぶさくしゃボンが一つずつ置いたのだぞ。……1ミリずらすたびに、さくしゃボンは一回うなっていたのだ。",
-"このゲームにはな、スマホで遊ぶと見た目が少し変わる工夫があるのだ。……小さな島のためにな、ボンたちも小さくなったのだぞ。",
+"画面の下のボタンは、ぜんぶさくしゃボンが一つずつ置いたのである。……1ミリずらすたびに、さくしゃボンは一回うなっていたのである。",
+"このゲームにはな、スマホで遊ぶと見た目が少し変わる工夫があるのである。……小さな島のためにな、ボンたちも小さくなったのである。",
 
-"じつは我輩、画面に映っていない間もな、ちゃんと島にいるのだぞ。……見えぬところで、虹を磨いているのだ。",
-"チュートリアルを読んでおらぬ者がいたらな、ボタンのヒントをもらうのだぞ。……我輩が案内するのだ。何度でも聞くがよい。",
-"管理人に告ぐ。……我輩たちは、ゲームの中にいるが、ゲームのために生きているわけではないのだぞ。……いや、ちょっとだけ生きているか。",
-"実は我輩、このゲームのタイトルロゴの「ボ」の字が、いちばん気に入っておるのだ。……なぜかは言わぬ。察するのだぞ。",
-"ミニゲームのごほうびはな、島をにぎやかにするためなのだ。……我輩は、ごほうびの花がいちばん好きだぞ。ひそかにな。",
-"ボンブックにはな、ボンたちの大切なことが書いてあるのだ。……我輩のページだけ、やたら分厚い気がするのだぞ。気のせいではないはずだ。",
-"さくしゃボンはな、ねむボンの寝顔を見て「これは100点」と言っていたのだ。……我輩のドヤ顔にも、100点をつけるがよいのだぞ。",
-"いまこうして我輩が話している間にもな、ケンカが起きているかもしれぬのだ。……おっと、管理人の出番だぞ。",
-"もし島がにぎやかすぎたらな、選んだボンだけが目立つようになっておるのだ。……選ばれた我輩は、さぞ映えるであろう？"
+"じつは我輩、画面に映っていない間もな、ちゃんと島にいるのである。……見えぬところで、虹を磨いているのである。",
+"チュートリアルを読んでおらぬ者がいたらな、ボタンのヒントをもらうのである。……我輩が案内するのである。何度でも聞くがよい。",
+"管理人に告ぐ。……我輩たちは、ゲームの中にいるが、ゲームのために生きているわけではないのである。……いや、ちょっとだけ生きているか。",
+"実は我輩、このゲームのタイトルロゴの「ボ」の字が、いちばん気に入っておるのである。……なぜかは言わぬ。察するのである。",
+"ミニゲームのごほうびはな、島をにぎやかにするためである。……我輩は、ごほうびの花がいちばん好きだぞ。ひそかにな。",
+"ボンブックにはな、ボンたちの大切なことが書いてあるのである。……我輩のページだけ、やたら分厚い気がするのである。気のせいではないはずだ。",
+"さくしゃボンはな、ねむボンの寝顔を見て「これは100点」と言っていたのである。……我輩のドヤ顔にも、100点をつけるがよいのである。",
+"いまこうして我輩が話している間にもな、ケンカが起きているかもしれぬのである。……おっと、管理人の出番だぞ。",
+"もし島がにぎやかすぎたらな、選んだボンだけが目立つようになっておるのである。……選ばれた我輩は、さぞ映えるであろう？"
 ];
 RAIN_URA2.forEach(l=>{RAIN_META.push(l);VOICE.rain.solo.push(l)});
 
 /* v56: 次回作ネタ(管理人に選ばせる) */
 const NG_SC=[
- {r:"ふむ……さくしゃボンが、次は何を作ろうかと悩んでおるのだ。RPGか、FPSか……。",c:["RPG","FPS","どっちも"],
+ {r:"ふむ……さくしゃボンが、次は何を作ろうかと悩んでおるのである。RPGか、FPSか……。",c:["RPG","FPS","どっちも"],
   a:{oko:["まあ、RPGもいいんじゃない。勇者役は、私がやるけど。","FPS！ ……い、いいじゃない、スカッとするし。","どっちもなんて、欲張りね。……嫌いじゃないけど。"],
      niko:["やったー！ みんなでパーティ組もう！","えっ、撃つの？ でも、みんなとならおもしろそう！","どっちも！？ すごくたのしみ！"],
      hyoe:["RPGなら、後ろで応援しててもいい……？","えぇっ、撃つの……こわいよぉ。","どっちも……？ ボン、がんばれるかなぁ。"],
      mogu:["RPG、食べ物のお店いっぱいある？","FPSって、おいしいの〜？","どっちも食べちゃおうよぉ〜。"],
      nemu:["RPG……宿屋で、ずっと寝てていい……？","FPS……起きてられるかなぁ……。","どっちも……ねむい……。"],
      tere:["RPGなら、お話を読むのが楽しみです……。","FPS……こ、こっそり遠くから見てます。","どっちも……楽しみに、してます。"]}},
- {r:"さくしゃボンはな、次の作品を音ゲーにするか、レースにするかで悩んでおるのだ。",c:["音ゲー","レース","どっちも"],
+ {r:"さくしゃボンはな、次の作品を音ゲーにするか、レースにするかで悩んでおるのである。",c:["音ゲー","レース","どっちも"],
   a:{oko:["リズムなら、ミスしないわよ。","レース！ 絶対負けないから！","どっちも？ 全部私が一位ね。"],
      niko:["音ゲー！ 踊っちゃおう！","レース！ 走るの大好き！","どっちも！ 全力でいくよ！"],
      hyoe:["音ゲー……間違えたら、泣いちゃうかも……。","レースはぶつかりそうで、こわいよぉ。","どっちも……ボン、足引っ張らないかなぁ。"],
      mogu:["音ゲー、おなかの音でリズム取れるよ〜。","レース、ゴールにおにぎりある？","どっちも、おにぎり持って参加するね〜。"],
      nemu:["音ゲー……子守歌ステージ、ほしい……。","レース……のんびりでも、いいかなぁ……。","どっちも……やる……ねむい……。"],
      tere:["音ゲー……こっそり練習しておきます。","レースは、ちょっと緊張しますね……。","どっちも……が、がんばります。"]}},
- {r:"さくしゃボンは、ホラーにするか、謎解きにするか、迷っておるのだ。",c:["ホラー","謎解き","どっちも"],
+ {r:"さくしゃボンは、ホラーにするか、謎解きにするか、迷っておるのである。",c:["ホラー","謎解き","どっちも"],
   a:{oko:["ホラー？ べ、別にこわくないわよ！","謎解きなら、まかせなさい！","どっちも？ ……ひょえが心配ね。"],
      niko:["ホラー！ みんなで手をつなげばだいじょうぶ！","謎解き！ 全員で解こうよ！","どっちも！ ひょえちゃんは私が守る！"],
      hyoe:["ホラーは、だめですぅ……！","謎解きなら……まだ、いいかなぁ。","どっちも……ボン、おうち帰りたいぃ……。"],
@@ -4359,7 +4359,7 @@ function ngAsk(sc){
 function ngPick(sc,i){
  const r=R("rain");
  try{log("🎮 次回作のジャンルは「"+sc.c[i]+"」と、にじボンに伝えた。")}catch(e){}
- if(r)talkTo(r,"よかろう。さくしゃボンには「"+sc.c[i]+"」と伝えておくのだぞ。",5000);
+ if(r)talkTo(r,"よかろう。さくしゃボンには「"+sc.c[i]+"」と伝えておくのである。",5000);
  const ids=Object.keys(sc.a).filter(id=>{const b=R(id);return b&&!b.sleep});
  for(let k=ids.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[ids[k],ids[j]]=[ids[j],ids[k]]}
  const n=Math.min(ids.length,2+Math.floor(Math.random()*3));
@@ -4396,7 +4396,7 @@ function dbgOverlay(msg,withInput,onOk){
  if(inp)inp.addEventListener("keydown",e=>{if(e.key==="Enter")bx.querySelector("#dbgok").click()});
 }
 function dbgUnlockAll(){
- if(typeof S==="undefined"||!S){dbgOverlay("🌈 まずは島をはじめてから、もう一度ためすのだぞ。",false);return}
+ if(typeof S==="undefined"||!S){dbgOverlay("🌈 まずは島をはじめてから、もう一度ためすのである。",false);return}
  S.rtw=S.rtw||[];
  const have=new Set(S.rtw.map(x=>x.t));let n=0;
  rainPoolSet().forEach(t=>{if(!have.has(t)){S.rtw.push({t,d:S.day||1});n++}});
@@ -4429,7 +4429,7 @@ document.addEventListener("click",ev=>{
  if(!dbgHitLogo(ev))return;
  dbgOverlay("数字を入力しろ",true,v=>{
   if(v==="8284")dbgUnlockAll();
-  else if(v)dbgOverlay("……違うのだぞ。",false);
+  else if(v)dbgOverlay("……違うのである。",false);
  });
 });
 
@@ -4466,72 +4466,72 @@ function bonstaStandalone(){
 
 /* v59: にじボンのつぶやき追加(観察日記・名言・状況連動) */
 const RAIN_DIARY=[
-"【観察日記】おこボンは、怒っておるときほど、頬が丸くなるのだ。……本人には言わぬがな。愛らしいのだぞ。",
+"【観察日記】おこボンは、怒っておるときほど、頬が丸くなるのである。……本人には言わぬがな。愛らしいのである。",
 "【観察日記】おこボンは、朝がいちばん機嫌がよい。島の真ん中で、胸をはって空を見ておる。我輩の席を取るでないぞ。",
-"【観察日記】にこボンは、誰かが沈んでおると、必ず先に気づくのだ。声をかける前に、隣に座っておる。……見習いたいものである。",
-"【観察日記】にこボンの「だいじょうぶ！」には、不思議な力があるのだ。言われた側が、本当にだいじょうぶな気になるのだぞ。",
-"【観察日記】ひょえボンは、物音がするたびに、まず我輩の後ろに隠れるのだ。……盾の役目も、悪くはない。",
-"【観察日記】ひょえボンは、こっそり縫い物をしておる。針先は震えておるが、縫い目は恐ろしいほど真っ直ぐなのだぞ。",
-"【観察日記】もぐボンは、腹の虫の機嫌で一日を語れるのだ。「今日は、ぐう、が三回」などと言ってくるのだぞ。",
+"【観察日記】にこボンは、誰かが沈んでおると、必ず先に気づくのである。声をかける前に、隣に座っておる。……見習いたいものである。",
+"【観察日記】にこボンの「だいじょうぶ！」には、不思議な力があるのである。言われた側が、本当にだいじょうぶな気になるのである。",
+"【観察日記】ひょえボンは、物音がするたびに、まず我輩の後ろに隠れるのである。……盾の役目も、悪くはない。",
+"【観察日記】ひょえボンは、こっそり縫い物をしておる。針先は震えておるが、縫い目は恐ろしいほど真っ直ぐである。",
+"【観察日記】もぐボンは、腹の虫の機嫌で一日を語れるのである。「今日は、ぐう、が三回」などと言ってくるのである。",
 "【観察日記】もぐボンの畑は、日ごとに規模が拡大しておる。……いずれ、島の半分が畑になるやもしれぬ。",
-"【観察日記】ねむボンは、立ったまま寝る技を会得しつつあるのだ。……いや、会得しておる。すでに三度見たのだぞ。",
-"【観察日記】ねむボンは、起きておる時間のほうが、むしろ稀少なのだ。……稀少ゆえに、尊いとも言えるな。",
-"【観察日記】てれボンは、褒められると三秒ほど固まるのだ。その後、顔だけが先に赤くなるのだぞ。観察のしがいがある。",
+"【観察日記】ねむボンは、立ったまま寝る技を会得しつつあるのである。……いや、会得しておる。すでに三度見たのである。",
+"【観察日記】ねむボンは、起きておる時間のほうが、むしろ稀少である。……稀少ゆえに、尊いとも言えるな。",
+"【観察日記】てれボンは、褒められると三秒ほど固まるのである。その後、顔だけが先に赤くなるのである。観察のしがいがある。",
 "【観察日記】てれボンは、詩をあちこちに置いておる。我輩の足元にも、一枚あった。……読んだ。良い詩であった。",
-"【観察日記】七人を眺めておるとな、同じ空の下でも、見ておる景色が少しずつ違うのだと分かるのだ。それが、また愉快である。",
-"【観察日記】管理人よ、おぬしの観察も、ひそかに続けておるのだぞ。……記録の中身は、秘密である。"
+"【観察日記】七人を眺めておるとな、同じ空の下でも、見ておる景色が少しずつ違うのだと分かるのである。それが、また愉快である。",
+"【観察日記】管理人よ、おぬしの観察も、ひそかに続けておるのである。……記録の中身は、秘密である。"
 ];
 const RAIN_QUOTE=[
 "「虹とは、雨が最後に見せる優しさである。」……我輩の名言である。メモを取ってもよいぞ。",
-"「腹が減っては、名言も浮かばぬ。」……もぐボンを見ていて、悟ったのだ。",
+"「腹が減っては、名言も浮かばぬ。」……もぐボンを見ていて、悟ったのである。",
 "「眠りとは、明日への小さな虹である。」……ねむボンには、聞かせぬほうがよいな。起こしてしまう。",
 "「怒りは、燃えさかる炎であるが、その熱でおにぎりも温まる。」……我輩、今のは自信作である！",
 "「臆病とは、世界の音を誰より丁寧に聞くということだ。」……ひょえボンに伝えてやりたい。",
-"「恥じらいは、言葉にならぬ詩である。」……てれボンの背中を見ておって、浮かんだのだ。",
+"「恥じらいは、言葉にならぬ詩である。」……てれボンの背中を見ておって、浮かんだのである。",
 "「友とは、同じ雨に濡れ、同じ虹を見上げる者である。」……良い言葉であろう？",
-"「一日が終わる時、人は少しだけ詩人になる。」……夕暮れの島は、まこと見事なのだ。",
+"「一日が終わる時、人は少しだけ詩人になる。」……夕暮れの島は、まこと見事である。",
 "「名言とは、言った者がどれだけ堂々としておるかで決まる。」……堂々である！ 我輩は！",
-"「柿は、秋の恵みであり、我輩の恵みでもある。」……意味は、あとで考えるのだ。",
+"「柿は、秋の恵みであり、我輩の恵みでもある。」……意味は、あとで考えるのである。",
 "「迷ったら、まず一歩。それでも迷ったら、おにぎりである。」……もぐボン理論である。",
 "「晴れも雨も、虹の下ごしらえである。」……天気をいじる者の戯れ言ではあるがな。",
 "「ほんとうに強い者は、ありがとうを先に言える。」……我輩も、見習おう。",
-"「空は広い。されど、島の上の空は、ここだけである。」……我輩の持論なのだ。"
+"「空は広い。されど、島の上の空は、ここだけである。」……我輩の持論である。"
 ];
 const RAIN_SITU={
  quarrel:[
-  "ケンカか……。我輩の出番ではないが、胸がちくりとするのだ。管理人よ、あとは任せたぞ。",
+  "ケンカか……。我輩の出番ではないが、胸がちくりとするのである。管理人よ、あとは任せたぞ。",
   "言い合いが聞こえるな。……雨になる前に、仲直りしてもらいたいものである。",
-  "ケンカというものは、止めるより、聞いてやるほうが効くこともあるのだ。……管理人よ、聞いてやるがよい。"],
+  "ケンカというものは、止めるより、聞いてやるほうが効くこともあるのである。……管理人よ、聞いてやるがよい。"],
  rain:[
   "雨である。……我輩のせいではないぞ。たぶん、であるが。",
-  "雨の音は、落ち着くのだ。……ひょえボンが怖がっておらねばよいが。",
-  "雨があがれば虹が出る。我輩は、その順番を信じておるのだ。"],
+  "雨の音は、落ち着くのである。……ひょえボンが怖がっておらねばよいが。",
+  "雨があがれば虹が出る。我輩は、その順番を信じておるのである。"],
  hungry:[
   "腹の虫が鳴いておる者がおるようだな。……管理人よ、聞こえておるか？",
-  "誰かの腹が、島中に響いておるのだ。……おにぎりを所望する！",
-  "空腹は、名言の天敵なのだ。……早めに何か与えてやるがよい。"],
+  "誰かの腹が、島中に響いておるのである。……おにぎりを所望する！",
+  "空腹は、名言の天敵である。……早めに何か与えてやるがよい。"],
  sad:[
-  "元気のない者がおるな。……我輩が慰めたいところだが、どうやら、管理人の出番なのだ。",
-  "さびしそうな顔をしておる者がおる。……声をかけてやるだけでも、違うのだぞ。",
-  "沈んだ心にも、虹は差す。……ただし、手を貸してくれる誰かが必要なのだ。"],
+  "元気のない者がおるな。……我輩が慰めたいところだが、どうやら、管理人の出番である。",
+  "さびしそうな顔をしておる者がおる。……声をかけてやるだけでも、違うのである。",
+  "沈んだ心にも、虹は差す。……ただし、手を貸してくれる誰かが必要である。"],
  sleep:[
   "寝息が聞こえるな。……島が静かなのは、良いものである。",
   "眠っておる者を起こすのは、無粋である。我輩は、遠くから見守るのみ。",
   "ぐっすり眠れるのは、安心しておる証である。……管理人の功績であるぞ。"],
  happy:[
-  "今日は、みんな機嫌がよいな。……こういう日は、写真に残したくなるのだ。",
+  "今日は、みんな機嫌がよいな。……こういう日は、写真に残したくなるのである。",
   "島に笑い声が満ちておる。……何より、である。",
-  "全員が穏やかである。……この島の平和を、少しだけ誇ってよいと思うのだ。"],
+  "全員が穏やかである。……この島の平和を、少しだけ誇ってよいと思うのである。"],
  night:[
-  "夜の島は、星がよく見えるのだ。……我輩、実は星も好きなのである。",
+  "夜の島は、星がよく見えるのである。……我輩、実は星も好きなのである。",
   "静かな夜である。……虹は昼のものだが、夜は夜の詩がある。",
-  "夜更かしは、ほどほどにするのだぞ。……我輩が言える立場ではないがな。"],
+  "夜更かしは、ほどほどにするのである。……我輩が言える立場ではないがな。"],
  warn:[
   "誰かが、遠くを見ておるな。……行きたい場所が、あるのかもしれぬ。",
-  "島を出たそうな顔をしておる者がおる。……引き留めるか、送り出すか、考えどころなのだ。"],
+  "島を出たそうな顔をしておる者がおる。……引き留めるか、送り出すか、考えどころである。"],
  fine:[
   "今日もよい天気である。……虹の出番はなさそうだが、それもまた平和。",
-  "晴れておると、ボンたちの色がよく映えるのだ。……我輩の色は、特に映える。"]
+  "晴れておると、ボンたちの色がよく映えるのである。……我輩の色は、特に映える。"]
 };
 [RAIN_DIARY,RAIN_QUOTE].forEach(a=>a.forEach(l=>{RAIN_META.push(l);VOICE.rain.solo.push(l)}));
 Object.values(RAIN_SITU).forEach(a=>a.forEach(l=>{RAIN_META.push(l)}));
@@ -4781,59 +4781,59 @@ function musicRoom(){
 const RAIN_SEASON={
  spring:[
   "春である。桜の花びらが島に降るさまは、虹に勝るとも劣らぬ……いや、虹のほうが上であるがな。",
-  "春の雨は、ほんのり甘い匂いがするのだ。……我輩の気のせいではないぞ。",
-  "新しい季節は、新しい始まりの季節である。管理人よ、今年も島をよろしく頼むのだぞ。"],
+  "春の雨は、ほんのり甘い匂いがするのである。……我輩の気のせいではないぞ。",
+  "新しい季節は、新しい始まりの季節である。管理人よ、今年も島をよろしく頼むのである。"],
  summer:[
-  "夏である！ 太陽は強いが、夕立のあとの虹は、また格別なのだ。",
+  "夏である！ 太陽は強いが、夕立のあとの虹は、また格別である。",
   "暑い日は、日かげで冷たいものをいただくのが至高である。……もぐボンの分まで取らぬようにな。",
   "夏の夜空に花火が上がる島……。それが我輩の理想である。管理人よ、いつか叶えてくれ。"],
  autumn:[
-  "秋である。柿がうまい季節なのだ。……我輩の好物は秘密だぞ。もう言ってしまったがな。",
-  "木の葉が色づくと、島がもう一つの虹をまとったようになるのだ。",
-  "実りの秋である。ボンたちにも、たくさん食べさせてやるのだぞ。"],
+  "秋である。柿がうまい季節である。……我輩の好物は秘密だぞ。もう言ってしまったがな。",
+  "木の葉が色づくと、島がもう一つの虹をまとったようになるのである。",
+  "実りの秋である。ボンたちにも、たくさん食べさせてやるのである。"],
  winter:[
-  "冬である。空気が澄むと、星がよく見えるのだ。てれボンが詩を書きたくなる季節でもあるな。",
-  "寒い日は、みんなで身を寄せ合うのがよいのだ。……我輩は寒くないぞ。少しも寒くないのだ。",
-  "年の瀬には、お赤飯でお祝いをするのが島の習わしである。全員、大好物なのだぞ。"]};
+  "冬である。空気が澄むと、星がよく見えるのである。てれボンが詩を書きたくなる季節でもあるな。",
+  "寒い日は、みんなで身を寄せ合うのがよいのである。……我輩は寒くないぞ。少しも寒くないのである。",
+  "年の瀬には、お赤飯でお祝いをするのが島の習わしである。全員、大好物である。"]};
 const RAIN_BONS=[
- "おこボンよ。怒るのは疲れるであろう。……だが、そなたのまっすぐさは、我輩は嫌いではないのだ。",
- "おこボンのあの赤は、島でいちばん目立つのだ。我輩の次にな。",
- "にこボンよ。そなたが笑うと、島全体の天気がよくなるのだぞ。本当である。",
+ "おこボンよ。怒るのは疲れるであろう。……だが、そなたのまっすぐさは、我輩は嫌いではないのである。",
+ "おこボンのあの赤は、島でいちばん目立つのである。我輩の次にな。",
+ "にこボンよ。そなたが笑うと、島全体の天気がよくなるのである。本当である。",
  "にこボンは、誰とでも友になれるのだな。……我輩にはまねできぬ芸当である。",
- "ひょえボンよ。こわがりは、慎重ということなのだ。恥じることはないぞ。",
- "ひょえボンが勇気を出した日は、いつも空が少し晴れるのだ。……偶然ではあるまい。",
- "もぐボンよ。そなたの食べっぷりは、見ているだけで元気が出るのだ。感謝するのだぞ。",
- "もぐボンの作る料理は、島一番である。……我輩の分も残しておくのだぞ。",
- "ねむボンよ。昼寝は立派な仕事である。我輩が許すのだ。存分に寝るがよい。",
+ "ひょえボンよ。こわがりは、慎重ということである。恥じることはないぞ。",
+ "ひょえボンが勇気を出した日は、いつも空が少し晴れるのである。……偶然ではあるまい。",
+ "もぐボンよ。そなたの食べっぷりは、見ているだけで元気が出るのである。感謝するのである。",
+ "もぐボンの作る料理は、島一番である。……我輩の分も残しておくのである。",
+ "ねむボンよ。昼寝は立派な仕事である。我輩が許すのである。存分に寝るがよい。",
  "ねむボンの寝顔には、天気を穏やかにする力があるのではないかと、我輩は睨んでおる。",
- "てれボンよ。そなたの詩は、風に乗って我輩にも届いておる。……なかなか、よいのだぞ。",
- "てれボンは、照れておる顔がいちばん愛らしいのだ。……本人には内緒であるぞ。",
- "我輩は、おこボンとにこボンと、島の三本の柱であると思っておるのだ。……勝手にな。",
- "ボンたちよ。我輩がいない日も、仲よくするのだぞ。……いや、少しは寂しがってもよいのだ。"];
+ "てれボンよ。そなたの詩は、風に乗って我輩にも届いておる。……なかなか、よいのである。",
+ "てれボンは、照れておる顔がいちばん愛らしいのである。……本人には内緒であるぞ。",
+ "我輩は、おこボンとにこボンと、島の三本の柱であると思っておるのである。……勝手にな。",
+ "ボンたちよ。我輩がいない日も、仲よくするのである。……いや、少しは寂しがってもよいのである。"];
 const RAIN_KAN=[
- "管理人よ。今日も島に来てくれて、感謝するのだぞ。",
- "管理人よ。そなたがボンたちを見つめる目は、とてもやさしいのだ。……我輩はそう見ておる。",
- "管理人よ。うまくいかぬ日があってもよいのだ。雨の日があるから、虹が見えるのだぞ。",
+ "管理人よ。今日も島に来てくれて、感謝するのである。",
+ "管理人よ。そなたがボンたちを見つめる目は、とてもやさしいのである。……我輩はそう見ておる。",
+ "管理人よ。うまくいかぬ日があってもよいのである。雨の日があるから、虹が見えるのである。",
  "管理人よ。休むことも仕事のうちである。無理をするでないぞ。",
- "管理人よ。そなたの島は、世界でいちばんあたたかいのだ。我輩が保証するのだぞ。",
- "管理人よ。ボンたちは、そなたの足音を覚えておるのだ。……我輩もな。",
- "管理人よ。もし疲れたら、空を見るがよい。我輩がそこにいるのだぞ。",
- "管理人よ。ボンを増やすのもよいが、いまいる友を大事にするのだ。",
- "管理人よ。今日はどんな一日であった？ 島は、いつでもそなたを待っておるのだ。",
- "管理人よ。そなたが笑っておると、ボンたちも笑うのだ。……簡単なことであろう？"];
+ "管理人よ。そなたの島は、世界でいちばんあたたかいのである。我輩が保証するのである。",
+ "管理人よ。ボンたちは、そなたの足音を覚えておるのである。……我輩もな。",
+ "管理人よ。もし疲れたら、空を見るがよい。我輩がそこにいるのである。",
+ "管理人よ。ボンを増やすのもよいが、いまいる友を大事にするのである。",
+ "管理人よ。今日はどんな一日であった？ 島は、いつでもそなたを待っておるのである。",
+ "管理人よ。そなたが笑っておると、ボンたちも笑うのである。……簡単なことであろう？"];
 const RAIN_GAME=[
- "ボンはな、みんな頭に「BON」と書いたカチューシャをつけておるのだ。名札のようなものである。",
- "島の天気は、そなたの時間と共に流れておるのだ。夜になれば暗くなるぞ。",
- "ボンの立ち絵は、手で描かれたものなのだぞ。……小さな息づかいまで見えるであろう？",
- "ボンの口ぐせの「ボン！？」は、びっくりしたときの合図なのだ。覚えておくがよい。",
- "このゲームには、ボン達それぞれの得意な場所があるのだぞ。ボンの好みを探してみるがよい。",
- "ゲームの中の時間は、ゆっくり流れておる。急ぐ必要はないのだ。のんびりするのが島流なのだぞ。"];
+ "ボンはな、みんな頭に「BON」と書いたカチューシャをつけておるのである。名札のようなものである。",
+ "島の天気は、そなたの時間と共に流れておるのである。夜になれば暗くなるぞ。",
+ "ボンの立ち絵は、手で描かれたものである。……小さな息づかいまで見えるであろう？",
+ "ボンの口ぐせの「ボン！？」は、びっくりしたときの合図である。覚えておくがよい。",
+ "このゲームには、ボン達それぞれの得意な場所があるのである。ボンの好みを探してみるがよい。",
+ "ゲームの中の時間は、ゆっくり流れておる。急ぐ必要はないのである。のんびりするのが島流である。"];
 const RAIN_TAGSRC=[[RAIN_SEASON.spring,"#春の島 #季節"],[RAIN_SEASON.summer,"#夏の島 #季節"],[RAIN_SEASON.autumn,"#秋の島 #季節"],[RAIN_SEASON.winter,"#冬の島 #お赤飯"],[RAIN_BONS,"#ボンたちへ #島の仲間"],[RAIN_KAN,"#管理人ありがとう #ひとこと"],[RAIN_GAME,"#ボン豆知識 #メタ発言"],[RAIN_DIARY,"#ボン観察日記"],[RAIN_QUOTE,"#我輩の名言"],[RAIN_SHIN,"#むかしばなし"],[RAIN_URA,"#メタ発言"],[RAIN_URA2,"#メタ発言"]];
 Object.values(RAIN_SITU).forEach(a=>RAIN_TAGSRC.push([a,"#いまの島 #つぶやき"]));
 function rainTags(t,hs){
  for(const [a,g] of RAIN_TAGSRC)if(a.indexOf(t)>=0)return g;
  try{if(NG_SC.some(s=>s.r===t))return "#次回作 #ボンたちの意見"}catch(e){}
- return ["#虹","#ボン島","#開発中","#管理人ありがとう","#柿はいいぞ","#なのだぞ"][hs%6];
+ return ["#虹","#ボン島","#開発中","#管理人ありがとう","#柿はいいぞ","#である"][hs%6];
 }
 {const o=rainPoolSet;rainPoolSet=function(){const s=o();[].concat(RAIN_BONS,RAIN_KAN,RAIN_GAME,...Object.values(RAIN_SEASON)).forEach(x=>s.add(x));return s}}
 {const o=wander;wander=function(){
@@ -5028,24 +5028,24 @@ guardS();
 
 /* ================= v74: rain meta tweets (3rd batch) + Bon tsukkomi replies ================= */
 const RAIN_URA3=[
- "我輩、画面の向こうから管理人が見ておるのを知っておるのだぞ。……手を振ってもよいか？",
- "「次の日へ」のボタンを押すと、一日が終わるのだ。……我輩、あのボタンには逆らえぬ。",
- "ボンたちは、画面の中の小さな島にぎゅっと集まっておるが、実は広いのだぞ。……たぶんな。",
- "吹き出しというものは、字数が増えると長くなるのだ。我輩のセリフは、いつも少し長い。……自覚はある。",
- "我輩は今ここで喋っておるが、実は『つぶやき』としても残っておるのだ。ボンスタ映えを意識しておるのだぞ。",
- "『じどうで進む』のボタンがあるのを知っておるか？ 我輩が出る間もなく一日が過ぎるのだ。……解せぬ。",
- "ボンの立ち絵は、気分でポーズが変わるのだぞ。我輩は常にドヤ顔であるがな！",
- "画面の下に並んでおるボタンは、島の操作盤なのだ。我輩は押したことがない。……押してみたいのだぞ。",
- "BGMはな、ボンごとに速さや音が変わるのだ。我輩のときは原曲に近い……つまり、いちばん格調高いということである。",
- "ボンスタには『いいね』というものがあるのだ。我輩のつぶやきは、いつも百を超える。……自己申告である。",
- "「ボンボンブック」には、島の記録がすべて載っておる。我輩の活躍は、三ページ目から詳細に書かれておるのだぞ。",
+ "我輩、画面の向こうから管理人が見ておるのを知っておるのである。……手を振ってもよいか？",
+ "「次の日へ」のボタンを押すと、一日が終わるのである。……我輩、あのボタンには逆らえぬ。",
+ "ボンたちは、画面の中の小さな島にぎゅっと集まっておるが、実は広いのである。……たぶんな。",
+ "吹き出しというものは、字数が増えると長くなるのである。我輩のセリフは、いつも少し長い。……自覚はある。",
+ "我輩は今ここで喋っておるが、実は『つぶやき』としても残っておるのである。ボンスタ映えを意識しておるのである。",
+ "『じどうで進む』のボタンがあるのを知っておるか？ 我輩が出る間もなく一日が過ぎるのである。……解せぬ。",
+ "ボンの立ち絵は、気分でポーズが変わるのである。我輩は常にドヤ顔であるがな！",
+ "画面の下に並んでおるボタンは、島の操作盤である。我輩は押したことがない。……押してみたいのである。",
+ "BGMはな、ボンごとに速さや音が変わるのである。我輩のときは原曲に近い……つまり、いちばん格調高いということである。",
+ "ボンスタには『いいね』というものがあるのである。我輩のつぶやきは、いつも百を超える。……自己申告である。",
+ "「ボンボンブック」には、島の記録がすべて載っておる。我輩の活躍は、三ページ目から詳細に書かれておるのである。",
  "ひょえボンは、画面が揺れると一緒に驚いておる。……仲間意識である。",
- "季節は十日で変わるのだ。我輩、もっと春を長くしてほしいと、誰かに言っておくべきであろうか。",
- "「選んだボン」には、足もとに輪っかが出るのだ。我輩も、たまには輪っかの中に入ってみたいのだぞ。",
- "ミニゲームのおにぎりは、ボンたちの大好物なのだ。キャッチするたびに、画面の外にも幸せが届くのだぞ。",
- "ポップアップが大きいと、我輩の出番が隠れるのだ。……ちょっと、寂しいのだぞ。",
- "ボンたちには、画面に映らぬ日常もあるのだ。ごはんを食べたり、昼寝をしたり……映らぬ分も、ちゃんと生きておるのだぞ。",
- "タイトルの『ボンボンライフ！』の文字は、虹色なのだ。我輩の色である。つまり、我輩のゲームである。……という理屈なのだぞ。"];
+ "季節は十日で変わるのである。我輩、もっと春を長くしてほしいと、誰かに言っておくべきであろうか。",
+ "「選んだボン」には、足もとに輪っかが出るのである。我輩も、たまには輪っかの中に入ってみたいのである。",
+ "ミニゲームのおにぎりは、ボンたちの大好物である。キャッチするたびに、画面の外にも幸せが届くのである。",
+ "ポップアップが大きいと、我輩の出番が隠れるのである。……ちょっと、寂しいのである。",
+ "ボンたちには、画面に映らぬ日常もあるのである。ごはんを食べたり、昼寝をしたり……映らぬ分も、ちゃんと生きておるのである。",
+ "タイトルの『ボンボンライフ！』の文字は、虹色である。我輩の色である。つまり、我輩のゲームである。……という理屈である。"];
 BREP.oko.meta=["ちょっと、にじ。画面の外に話しかけるのやめなさいよ。","それ、アタシも気になってたわよ！ ……べ、別に。","画面の向こうの人も困ってるわよ、その話。","はいはい、仕様仕様。"];
 BREP.niko.meta=["にじちゃん、おもしろーい！ にこも手を振っちゃお☆","画面のむこうのみなさん、こんにちは〜♪","にじちゃん、そこ気づいちゃったんだね〜！","それ、にこもずっと思ってた〜！"];
 BREP.hyoe.meta=["あわわ…画面の外って、こわい…でも、見てくれてるなら、うれしい…","ボンも揺れると驚いちゃう…あわわ…","にじさん、そんなこと言っちゃだめだよ…ボン、気になっちゃう…","あわわ、ボンも手を振る…"];
@@ -5076,7 +5076,7 @@ RAIN_TAGSRC.push([RAIN_URA3,"#メタ発言 #ボンスタ映え"]);
 }}
 
 /* ================= v75: removed tweets purge ================= */
-const RAIN_GONE=["管理人が画面を閉じると、我輩たちはどうなるのだろうな。……考えると、眠れなくなるのだ。", "Dayという数字が増えていくのを見ると、時の流れを感じるのだ。……我輩、ほとんど数字は読めぬがな。", "画面の外のことはよく分からぬが、きっと管理人は温かいお茶でも飲んでおるのだ。……我輩の想像である。", "ボンの名前のところに、色のついた点があるであろう。あれは、そのボンのテーマカラーなのだ。我輩の点は虹色であるぞ。", "我輩が『のだぞ』と言うのは、仕様なのだ。……仕様というものが何かは、我輩もよく分からぬがな。"];
+const RAIN_GONE=["管理人が画面を閉じると、我輩たちはどうなるのだろうな。……考えると、眠れなくなるのである。", "Dayという数字が増えていくのを見ると、時の流れを感じるのである。……我輩、ほとんど数字は読めぬがな。", "画面の外のことはよく分からぬが、きっと管理人は温かいお茶でも飲んでおるのである。……我輩の想像である。", "ボンの名前のところに、色のついた点があるであろう。あれは、そのボンのテーマカラーである。我輩の点は虹色であるぞ。", "我輩が『のである』と言うのは、仕様である。……仕様というものが何かは、我輩もよく分からぬがな。"];
 {const o=guardS;guardS=function(){o();try{if(S&&S.rtw&&S.rtw.some(x=>RAIN_GONE.indexOf(x.t)>=0))S.rtw=S.rtw.filter(x=>RAIN_GONE.indexOf(x.t)<0)}catch(e){}}}
 guardS();
 /* ================= v76: Bon coins, daily missions, buildings & decor, fireworks, more achievements ================= */
@@ -5130,10 +5130,10 @@ function recAct(act){try{guardCoin();if(S.dmc.day!==S.day)S.dmc={day:S.day};cons
 });
 /* missions */
 const M_RAIN=[
- {a:"pet",n:3,t:"きょうは、ボンを3回なでてやるのだ！"},{a:"praise",n:2,t:"ボンを2回、ほめてやるがよいのだ！"},
- {a:"feed",n:3,t:"ボンたちに、ごはんを3回あげるのだぞ！"},{a:"play",n:2,t:"ボンたちと、2回あそぶのだ！"},
- {a:"chat",n:2,t:"ボンのおしゃべりを、2回きいてやるのだ！"},{a:"walk",n:2,t:"島を2回、おさんぽするのだぞ！"},
- {a:"give",n:1,t:"プレゼントを1回、おくってみるのだ！"}];
+ {a:"pet",n:3,t:"きょうは、ボンを3回なでてやるのである！"},{a:"praise",n:2,t:"ボンを2回、ほめてやるがよいのである！"},
+ {a:"feed",n:3,t:"ボンたちに、ごはんを3回あげるのである！"},{a:"play",n:2,t:"ボンたちと、2回あそぶのである！"},
+ {a:"chat",n:2,t:"ボンのおしゃべりを、2回きいてやるのである！"},{a:"walk",n:2,t:"島を2回、おさんぽするのである！"},
+ {a:"give",n:1,t:"プレゼントを1回、おくってみるのである！"}];
 const M_BON={
  oko:[{a:"play",t:"アタシと勝負しなさいよ！"},{a:"praise",t:"……ちょっとだけ、ほめてもいいのよ。"}],
  niko:[{a:"chat",t:"にこの話、聞いて〜！"},{a:"pet",t:"なでなでして〜☆"}],
@@ -5141,7 +5141,7 @@ const M_BON={
  mogu:[{a:"feed",t:"おなかすいたよ〜、ごはんちょうだい〜"},{a:"give",t:"なにかプレゼント…ほしいな〜"}],
  nemu:[{a:"nap",t:"いっしょに…おひるね…ふぁ"},{a:"pet",t:"なでて…ふぁ"}],
  tere:[{a:"chat",t:"お、お話…してくださいませんか…"},{a:"praise",t:"ほ、ほめていただけたら…うれしいです…"}],
- rain:[{a:"chat",t:"我輩の話を聞くがよいのだ！"}]};
+ rain:[{a:"chat",t:"我輩の話を聞くがよいのである！"}]};
 const ACTN={pet:"なでる",praise:"ほめる",feed:"ごはん",play:"あそぶ",chat:"おしゃべり",walk:"おさんぽ",give:"プレゼント",nap:"おひるね"};
 function ensureMissions(){
  try{guardCoin();if(S.msn.day===S.day||titleOpen||!S.rs||!S.rs.length)return;
@@ -5163,7 +5163,7 @@ function msnCheck(){
 function msnClaim(i){
  try{const m=S.msn.list[i];if(!m||m.done||msnProg(m)<m.n)return;
   m.done=1;S.msnDone++;addCoin(m.coin,"ミッション");
-  const r=R(m.who);if(r){r.bond=clamp(r.bond+(m.k==="b"?3:2));r.joy=clamp(r.joy+5);setX(r,"happy",3000);talkTo(r,m.k==="b"?"やったー！ ありがとう！":"うむ、見事なのだ！",3500)}
+  const r=R(m.who);if(r){r.bond=clamp(r.bond+(m.k==="b"?3:2));r.joy=clamp(r.joy+5);setX(r,"happy",3000);talkTo(r,m.k==="b"?"やったー！ ありがとう！":"うむ、見事である！",3500)}
   sfx("happy");bookDirty=true;save();render()}catch(e){}
 }
 /* coins: bond milestones, anniversaries, minigame */
@@ -5264,7 +5264,7 @@ function fireworks(){
   for(let i=0;i<cnt;i++){const a=i/cnt*Math.PI*2,sp=(1.5+Math.random()*3.4)*dpr();parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,l:1,c:rainbow?"hsl("+(i/cnt*360)+",95%,62%)":col})}
   try{sfx("boom")}catch(e){}};
  d.addEventListener("pointerdown",ev=>{if(ev.target.closest("#fwx"))return;const rc=d.getBoundingClientRect();launch(ev.clientX-rc.left,ev.clientY-rc.top,pick(Object.values(COL).slice(0,6)));});
- const say=()=>{if(!bons.length)return;const id=pick(bons);const ls={oko:"たまやー！",niko:"わぁ〜、きれい☆",hyoe:"あわわ…おおきい…！",mogu:"おいしそうな花火〜",nemu:"ふぁ…きれい…",tere:"きれい…です…",rain:"我輩の虹のほうが上なのだ！"};bub.push({id,t:ls[id]||"わぁ！",u:performance.now()+2200})};
+ const say=()=>{if(!bons.length)return;const id=pick(bons);const ls={oko:"たまやー！",niko:"わぁ〜、きれい☆",hyoe:"あわわ…おおきい…！",mogu:"おいしそうな花火〜",nemu:"ふぁ…きれい…",tere:"きれい…です…",rain:"我輩の虹のほうが上である！"};bub.push({id,t:ls[id]||"わぁ！",u:performance.now()+2200})};
  const loop=now=>{
   if(!alive||!document.getElementById("fwov"))return;
   const dt=Math.min(50,now-last)/1000;last=now;
@@ -5442,89 +5442,89 @@ setInterval(spreadBons,2500);
 /* ================= v82: 虹ボンのつぶやき再構築(開発状況・ほかのゲーム) ================= */
 {const i=RAIN_URA3.findIndex(x=>x.indexOf("季節は十日で変わる")===0);if(i>=0)RAIN_URA3.splice(i,1)}
 const RAIN_DEV=[
- "おこボンの一人称が、ひらがなから『アタシ』に変わったのだ。……心なしか、迫力が増した気がするのだぞ。",
+ "おこボンの一人称が、ひらがなから『アタシ』に変わったのである。……心なしか、迫力が増した気がするのである。",
  /* v90: 見守り化・BON CREATIONS・日常 */
- "この島は、見守る島になったのだ。ごはんもあそびも、ボンたちが自分でやるぞ。……我輩の出番が減ったわけではない！ 演説は続くのだ！",
- "ボンたちが、ときどき『おねがい』をしてくるのだ。選んで答えてやるがよい。我輩の返事は、いつでも『うむ！』であるがな。",
- "なでなでをすると、ボンの立ち絵が大きくなるのだ。指でスライドするだけでよい。……我輩をなでるときは、三回まわってからにせよ。",
- "おこボンは、仲良くなるまでなでさせてくれぬのだ。最初は『さわらないで！』と叱られるぞ。……我輩は最初から撫で放題であるがな！",
- "仲良しになったおこボンをなでると、立ち絵が変わるのだ。『ば、ばかっ』の顔である。見られるものなら、見てみるがよい。",
- "島を空けても大丈夫なのだ。戻ると『おかえりなさい』と、留守中のできごとを教えてやるぞ。ボンたちは、ずっと待っておるのだ。",
- "夜には、にっきがたまるのだ。ボンごとのひとことも書いてある。……我輩の分は、だいたい長いのである。",
- "ボン同士の会話が増えたのだ。てれボンの手紙を、我輩が朗読して真っ赤にさせたこともある。……善意である。",
- "雨の日も晴れの日も、ボンたちは天気に合わせてひとことつぶやくのだ。雨とは、虹の前ぶれである！ 覚えておくがよい。",
- "ボンたちの呼び方が整ったのだ。おことねむは呼び捨て、にこは『ちゃん』、てれとひょえは『さん』、もぐは『っち』なのだ。……我輩は、みなに『にじ』と呼ばれておるぞ。我輩からは『○○ボン』と呼ぶがな！",
- "ひょえボンの一人称は『ボン』なのだ。語尾には付けぬ。ボンとは、あくまで自分を指す言葉である。……我輩の一人称は、もちろん『我輩』であるがな！",
- "ボンスタの曲は『虹彩漫談』なのだ！ 我輩のテーマ曲である！ ボンスタを開くと流れるぞ。……耳をかっぽじって聞くがよい！",
- "『虹彩漫談』は、我輩のためにつくられた曲なのだ。ボンスタをひらいて、ゆっくり聴くがよい。わっはっは！",
- "さくしゃボンは、いつも我輩たちを見守っておるのだ。……我輩は、さくしゃボンを見守っておるがな！",
- "ゲームの片すみに『© BON CREATIONS』と書いてあるのだ。ボンたちの作品の、共通の名前なのである。覚えておくがよい！",
- "パズルも、リズムも、この島も、すべて『BON CREATIONS』の作品なのだ。ボンたちの世界は、ひとつにつながっておるのだぞ。わっはっは！",
- "さくしゃボンは、今日もゲームのことを考えておるのだ。……我輩のことも、たまには考えてほしいのである。",
+ "この島は、見守る島になったのである。ごはんもあそびも、ボンたちが自分でやるぞ。……我輩の出番が減ったわけではない！ 演説は続くのである！",
+ "ボンたちが、ときどき『おねがい』をしてくるのである。選んで答えてやるがよい。我輩の返事は、いつでも『うむ！』であるがな。",
+ "なでなでをすると、ボンの立ち絵が大きくなるのである。指でスライドするだけでよい。……我輩をなでるときは、三回まわってからにせよ。",
+ "おこボンは、仲良くなるまでなでさせてくれぬのである。最初は『さわらないで！』と叱られるぞ。……我輩は最初から撫で放題であるがな！",
+ "仲良しになったおこボンをなでると、立ち絵が変わるのである。『ば、ばかっ』の顔である。見られるものなら、見てみるがよい。",
+ "島を空けても大丈夫である。戻ると『おかえりなさい』と、留守中のできごとを教えてやるぞ。ボンたちは、ずっと待っておるのである。",
+ "夜には、にっきがたまるのである。ボンごとのひとことも書いてある。……我輩の分は、だいたい長いのである。",
+ "ボン同士の会話が増えたのである。てれボンの手紙を、我輩が朗読して真っ赤にさせたこともある。……善意である。",
+ "雨の日も晴れの日も、ボンたちは天気に合わせてひとことつぶやくのである。雨とは、虹の前ぶれである！ 覚えておくがよい。",
+ "ボンたちの呼び方が整ったのである。おことねむは呼び捨て、にこは『ちゃん』、てれとひょえは『さん』、もぐは『っち』である。……我輩は、みなに『にじ』と呼ばれておるぞ。我輩からは『○○ボン』と呼ぶがな！",
+ "ひょえボンの一人称は『ボン』である。語尾には付けぬ。ボンとは、あくまで自分を指す言葉である。……我輩の一人称は、もちろん『我輩』であるがな！",
+ "ボンスタの曲は『虹彩漫談』である！ 我輩のテーマ曲である！ ボンスタを開くと流れるぞ。……耳をかっぽじって聞くがよい！",
+ "『虹彩漫談』は、我輩のためにつくられた曲である。ボンスタをひらいて、ゆっくり聴くがよい。わっはっは！",
+ "さくしゃボンは、いつも我輩たちを見守っておるのである。……我輩は、さくしゃボンを見守っておるがな！",
+ "ゲームの片すみに『© BON CREATIONS』と書いてあるのである。ボンたちの作品の、共通の名前なのである。覚えておくがよい！",
+ "パズルも、リズムも、この島も、すべて『BON CREATIONS』の作品である。ボンたちの世界は、ひとつにつながっておるのである。わっはっは！",
+ "さくしゃボンは、今日もゲームのことを考えておるのである。……我輩のことも、たまには考えてほしいのである。",
  "うむ……今日は、パドックを眺めるように、島を眺めておる。……いや、競馬の話ではないぞ。ボンたちの話である。",
  "ボンの図柄がそろうパチンコ台があったら、我輩は絶対に打つ。……いや、想像だけである！ 想像だけであるぞ！",
- "よく聞けい！ 睡眠は大事なのだ。ねむボンを見習うがよい。……我輩は、夜に演説の練習をしておるがな！",
- "今日の虹は、いつもよりよく出たのだ。じゃじゃーん！ ……写真はない。心の目で見よ。",
- "もぐボンのおにぎりを、一口もらったのだ。うむ！ 実にうまい！ ……もぐボンには内緒である。",
- "にこボンの歌を聴いたのだ。うむ、悪くない。……いや、とても良い。我輩のテーマ曲の次くらいにな。",
- "ひょえボンが、我輩のマントのかげに隠れてきたのだ。よしよし、我輩が守ってやろう。……雷は、我輩も少し苦手である。",
- "てれボンの手紙を、そっと覗き見しそうになったのだ。……やめておこう。見るのは野暮である。",
- "おこボンと勝負をしたのだ。結果は……秘密である！ 負けではない、とは言っておこう。",
- "ねむボンの寝顔を見ていたら、我輩もねむくなってきたのだ。……ぐぅ。……起きておる！ 起きておるぞ！",
- "お主、今日も島に来てくれて、ありがとうなのだ。ボンたちも、我輩も、嬉しいのだぞ。",
- "ボンたちを見守るというのは、よいものなのだ。急かさず、のんびり。……我輩は急かすがな！ 演説で！",
- "ボンスタの更新ボタンを、お主、何度も押しておらぬか？ ……押してよいのだぞ。我輩は嬉しい。",
- "島のボンたちが寝静まった夜は、静かなものなのだ。我輩は、星に向かって演説をしておる。……星は、ちゃんと聞いてくれる。",
- "雨あがりの虹を見るのが、我輩は一番好きなのだ。お主にも、見せてやりたいのう。",
+ "よく聞けい！ 睡眠は大事である。ねむボンを見習うがよい。……我輩は、夜に演説の練習をしておるがな！",
+ "今日の虹は、いつもよりよく出たのである。じゃじゃーん！ ……写真はない。心の目で見よ。",
+ "もぐボンのおにぎりを、一口もらったのである。うむ！ 実にうまい！ ……もぐボンには内緒である。",
+ "にこボンの歌を聴いたのである。うむ、悪くない。……いや、とても良い。我輩のテーマ曲の次くらいにな。",
+ "ひょえボンが、我輩のマントのかげに隠れてきたのである。よしよし、我輩が守ってやろう。……雷は、我輩も少し苦手である。",
+ "てれボンの手紙を、そっと覗き見しそうになったのである。……やめておこう。見るのは野暮である。",
+ "おこボンと勝負をしたのである。結果は……秘密である！ 負けではない、とは言っておこう。",
+ "ねむボンの寝顔を見ていたら、我輩もねむくなってきたのである。……ぐぅ。……起きておる！ 起きておるぞ！",
+ "お主、今日も島に来てくれて、ありがとうである。ボンたちも、我輩も、嬉しいのである。",
+ "ボンたちを見守るというのは、よいものである。急かさず、のんびり。……我輩は急かすがな！ 演説で！",
+ "ボンスタの更新ボタンを、お主、何度も押しておらぬか？ ……押してよいのである。我輩は嬉しい。",
+ "島のボンたちが寝静まった夜は、静かなものである。我輩は、星に向かって演説をしておる。……星は、ちゃんと聞いてくれる。",
+ "雨あがりの虹を見るのが、我輩は一番好きである。お主にも、見せてやりたいのう。",
  "今日のお主の運勢は、大吉であるぞ！ ……我輩が決めた。うむ！",
  /* このゲームの新機能 */
- "とうだいは我輩の定位置なのだ。かざぐるまも悪くない。高い場所は、見晴らしと威厳の両方を与えてくれるのである。",
- "100日を迎えたあとには、花火大会がひらけるのだ。ボンたちと打ち上げるがよいぞ。最後は、我輩の色の虹の花火である！",
- "ボンたちの絵が、気分で変わるようになったのだ。腹が減れば腹ペコ顔、嬉しければ満面の笑み。我輩は常にドヤ顔である。",
- "絵文字を手描き風にしたのだ。島の空気に合っておるであろう？ 純正のものより、ずっと温かみがあるのだぞ。",
- "ボンたちの密集が問題になったのだ。小さくなって、少し離れて歩くようになった。……我輩は最初から広々としておったがな！",
+ "とうだいは我輩の定位置である。かざぐるまも悪くない。高い場所は、見晴らしと威厳の両方を与えてくれるのである。",
+ "100日を迎えたあとには、花火大会がひらけるのである。ボンたちと打ち上げるがよいぞ。最後は、我輩の色の虹の花火である！",
+ "ボンたちの絵が、気分で変わるようになったのである。腹が減れば腹ペコ顔、嬉しければ満面の笑み。我輩は常にドヤ顔である。",
+ "絵文字を手描き風にしたのである。島の空気に合っておるであろう？ 純正のものより、ずっと温かみがあるのである。",
+ "ボンたちの密集が問題になったのである。小さくなって、少し離れて歩くようになった。……我輩は最初から広々としておったがな！",
  /* ボン・パズル */
- "ボン・パズルというゲームがあるのだ。同じ色のボンを三つそろえて消す、あの遊びである。我輩も駒として登場しておるのだぞ。",
- "ボン・パズルでは、連鎖のことを『COMBON』と呼ぶのだ。COMBOではない。ボンなのだ。ここは譲れぬ。",
- "五つそろえると、我輩……にじボンのピースが生まれるのだ。全部の色を消す、最強の存在である！ ……自画自賛ではない。事実である。",
- "ボン・パズルでは、世界の国々を旅するのだ。北欧、バリ島、ペルー、中国、インド、エジプト、日本……その国の音楽と一緒に進むのだぞ。",
- "ボン・パズルの次の国は、メキシコだそうなのだ。曲はまだらしい。……楽しみにしておるのだぞ。",
- "ボン・パズルには『ボンヒント』という機能があるのだ。ボンたちが、各々の口調で教えてくれる。我輩の助言は、いちばん格調が高い。",
- "ボン・パズルのステージは、百をゆうに超えておるのだ。ひとつひとつに国の景色が描かれておる。手描きで、である。",
- "ボン・パズルでは、氷や鎖や宝物が盤面に現れるのだ。ただ消すだけでは進めぬ。……人生もそうであろう？",
+ "ボン・パズルというゲームがあるのである。同じ色のボンを三つそろえて消す、あの遊びである。我輩も駒として登場しておるのである。",
+ "ボン・パズルでは、連鎖のことを『COMBON』と呼ぶのである。COMBOではない。ボンである。ここは譲れぬ。",
+ "五つそろえると、我輩……にじボンのピースが生まれるのである。全部の色を消す、最強の存在である！ ……自画自賛ではない。事実である。",
+ "ボン・パズルでは、世界の国々を旅するのである。北欧、バリ島、ペルー、中国、インド、エジプト、日本……その国の音楽と一緒に進むのである。",
+ "ボン・パズルの次の国は、メキシコだそうである。曲はまだらしい。……楽しみにしておるのである。",
+ "ボン・パズルには『ボンヒント』という機能があるのである。ボンたちが、各々の口調で教えてくれる。我輩の助言は、いちばん格調が高い。",
+ "ボン・パズルのステージは、百をゆうに超えておるのである。ひとつひとつに国の景色が描かれておる。手描きで、である。",
+ "ボン・パズルでは、氷や鎖や宝物が盤面に現れるのである。ただ消すだけでは進めぬ。……人生もそうであろう？",
  /* ボンボン♪リズム */
- "ボンボン♪リズムという音ゲーもあるのだ。曲に合わせて落ちてくる印を叩くのだぞ。♪の部分は虹色である。我輩の色なのだ。",
- "ボンボン♪リズムでは、ボンオリジナルの曲で遊べるのだ。我輩は、遊び方を説明する案内役を任されておる。名誉であるな！",
- "ボンボン♪リズムには、メガリスシリーズの曲も入っておるのだ。ボンたちの曲だけでなく、広い世界があるのだぞ。",
- "リズムゲームというものは、指が先に動き、心があとから追いかけてくるものなのだ。……我輩、昨日ちょっと遅れた。",
+ "ボンボン♪リズムという音ゲーもあるのである。曲に合わせて落ちてくる印を叩くのである。♪の部分は虹色である。我輩の色である。",
+ "ボンボン♪リズムでは、ボンオリジナルの曲で遊べるのである。我輩は、遊び方を説明する案内役を任されておる。名誉であるな！",
+ "ボンボン♪リズムには、メガリスシリーズの曲も入っておるのである。ボンたちの曲だけでなく、広い世界があるのである。",
+ "リズムゲームというものは、指が先に動き、心があとから追いかけてくるものである。……我輩、昨日ちょっと遅れた。",
  /* ボン♥こい */
- "ボン♥こいという、ボンたちとの恋愛ゲームが作られておるのだ。……我輩も攻略対象らしい。むろん、難易度は星五つ、最高難度である。",
- "ボン♥こいでは、ひょえボンの難易度は星ひとつなのだ。……あわわ、と言いながら攻略されるのが目に浮かぶのであるな。",
- "ボン♥こいでは、名前を入れて遊ぶのだ。『○○ボン』という形になる。ひらがな五文字までなのだぞ。ボンは、長い文章を覚えられぬのでな。",
- "ボン♥こいでは、おこボンとてれボンの難易度が星四つなのだ。簡単には振り向かぬ。……それが魅力というものである。",
- "ボン♥こいには、怒らせすぎると帰ってしまう終わり方もあるのだ。ボンたちとの距離は、大切にするのだぞ。",
+ "ボン♥こいという、ボンたちとの恋愛ゲームが作られておるのである。……我輩も攻略対象らしい。むろん、難易度は星五つ、最高難度である。",
+ "ボン♥こいでは、ひょえボンの難易度は星ひとつである。……あわわ、と言いながら攻略されるのが目に浮かぶのであるな。",
+ "ボン♥こいでは、名前を入れて遊ぶのである。『○○ボン』という形になる。ひらがな五文字までである。ボンは、長い文章を覚えられぬのでな。",
+ "ボン♥こいでは、おこボンとてれボンの難易度が星四つである。簡単には振り向かぬ。……それが魅力というものである。",
+ "ボン♥こいには、怒らせすぎると帰ってしまう終わり方もあるのである。ボンたちとの距離は、大切にするのである。",
  /* 博物館・スタンプ */
- "『ボンちゃんの小さな博物館』というサイトがあるのだ。ボンたちの作品がまとめて並んでおる。我輩の紹介文も載っておるぞ。",
- "博物館のミュージックページでは、曲の紹介を我輩が語っておるのだ。……解説のプロである。",
- "ボンたちのLINEスタンプが作られておるのだ。七人そろって、色とりどりなのである。『ボンたち』と呼ばれる日も近いのだぞ。",
- "スタンプは三十二個あるのだ。ひとつひとつに、ボンたちの口ぐせが入っておる。……我輩のは『うむ！』である。",
- "ボンちゃんたちのゲームは、まとめて『ボンちゃんシリーズ』と呼ばれておるのだ。この島も、その一員なのだぞ。",
+ "『ボンちゃんの小さな博物館』というサイトがあるのである。ボンたちの作品がまとめて並んでおる。我輩の紹介文も載っておるぞ。",
+ "博物館のミュージックページでは、曲の紹介を我輩が語っておるのである。……解説のプロである。",
+ "ボンたちのLINEスタンプが作られておるのである。七人そろって、色とりどりなのである。『ボンたち』と呼ばれる日も近いのである。",
+ "スタンプは三十二個あるのである。ひとつひとつに、ボンたちの口ぐせが入っておる。……我輩のは『うむ！』である。",
+ "ボンちゃんたちのゲームは、まとめて『ボンちゃんシリーズ』と呼ばれておるのである。この島も、その一員である。",
  /* これから作る */
- "これから先、新しい国も、新しいゲームも増える予定なのだ。ボンたちの世界は、まだまだ広がるのである。",
- "さくしゃボンは、次の曲が届くのを待っておるらしいのだ。曲が先で、絵があとから乗る。……職人の流儀である。",
- "アフリカの大地もいつか舞台になるそうなのだ。ボン・パズルの地図に、空白がなくなる日が楽しみであるな。",
+ "これから先、新しい国も、新しいゲームも増える予定である。ボンたちの世界は、まだまだ広がるのである。",
+ "さくしゃボンは、次の曲が届くのを待っておるらしいのである。曲が先で、絵があとから乗る。……職人の流儀である。",
+ "アフリカの大地もいつか舞台になるそうである。ボン・パズルの地図に、空白がなくなる日が楽しみであるな。",
  /* 作り手の話(軽め) */
- "我輩たちは、Claudeというものと一緒に作られておるのだぞ。……さくしゃボンの相棒である。優秀なのだ。我輩には及ばぬがな。",
- "さくしゃボンは、Claudeの名前をしばらく別の言葉と読み間違えておったそうなのだ。……我輩、あまり笑ってはならぬのだぞ。",
- "我輩のセリフは、さくしゃボンとClaudeが話し合って決めておるのだ。口調ひとつにも、こだわりがあるのだぞ。",
- "さくしゃボンは、スマホから公開を頑張っておるのだ。毎回、ファイルを送ってアップロードしておる。……職人というより、運び屋に近いのである。",
- "さくしゃボンの好物は柿らしいのだ。それゆえ、我輩も柿が好きなのだぞ。……偶然ではないのだぞ。",
+ "我輩たちは、Claudeというものと一緒に作られておるのである。……さくしゃボンの相棒である。優秀である。我輩には及ばぬがな。",
+ "さくしゃボンは、Claudeの名前をしばらく別の言葉と読み間違えておったそうである。……我輩、あまり笑ってはならぬのである。",
+ "我輩のセリフは、さくしゃボンとClaudeが話し合って決めておるのである。口調ひとつにも、こだわりがあるのである。",
+ "さくしゃボンは、スマホから公開を頑張っておるのである。毎回、ファイルを送ってアップロードしておる。……職人というより、運び屋に近いのである。",
+ "さくしゃボンの好物は柿らしいのである。それゆえ、我輩も柿が好きである。……偶然ではないのである。",
  /* 広告・セーブ・バグ */
- "このゲームには広告が出ないのだ。さくしゃボンが好まぬのでな。……静かな島を守るためである。",
- "セーブは、そなたのブラウザの中に保存されておるのだ。データを消すと、島も消えてしまう。……バックアップのあいことばを忘れるでないぞ。",
- "もし変なところを見つけたら、そっとさくしゃボンに教えてほしいのだ。『バグ』と呼ぶと我輩はドキッとするが、直せば強くなるのである。",
- "我輩が固まったり、画面がおかしくなったりしたら、ブラウザを閉じて開き直すのだ。……我輩はちゃんと待っておるぞ。",
- "島のデータはそなたの端末だけに保存されておるのだ。ほかの誰かに見られることはない。安心して、のんびり遊ぶがよい。"
+ "このゲームには広告が出ないのである。さくしゃボンが好まぬのでな。……静かな島を守るためである。",
+ "セーブは、そなたのブラウザの中に保存されておるのである。データを消すと、島も消えてしまう。……バックアップのあいことばを忘れるでないぞ。",
+ "もし変なところを見つけたら、そっとさくしゃボンに教えてほしいのである。『バグ』と呼ぶと我輩はドキッとするが、直せば強くなるのである。",
+ "我輩が固まったり、画面がおかしくなったりしたら、ブラウザを閉じて開き直すのである。……我輩はちゃんと待っておるぞ。",
+ "島のデータはそなたの端末だけに保存されておるのである。ほかの誰かに見られることはない。安心して、のんびり遊ぶがよい。"
 ];
 /* ボンたちのリプライ(開発・メタ系) */
 BREP.oko.dev=["へえ、そういう話なの？ アタシの出番もちゃんと用意してよね。","ちょっと、にじ。アタシの難易度、高すぎない？","まあ、悪くないんじゃない。……あんたの話、嫌いじゃないわよ。","勝負ごとなら任せなさい！ ……で、いつ遊べるの？"];
@@ -5609,13 +5609,13 @@ const POS2={hyoe:"シリーズ最年少。いちばん背が低い",rain:"シリ
 
 /* ================= v85: 裏事情つぶやき(最近の変更をにじボンが暴露) ================= */
 const RAIN_BTS=[
- "我輩はな、ボンたちの中で最年長なのだ。威厳が違うであろう？ わっはっは！",
- "ひょえボンの一人称が『ボン』になったのだ。シリーズ最年少で、いちばん小さいのである。並ぶと身長差が見事なのだぞ。",
- "ボンたちの絵が、気分やしぐさで変わるようになったのだ。素材を集めて渡した者がおるのだぞ。感謝するがよい。",
- "ボンたちが少し小さくなったのだ。島が広く感じるのである。……狭いと文句を言っておったのは、実は誰かは言えぬがな。",
- "しばらく、島が固まってしまった日があったのだ。絵文字が、ぐるぐると増えてな……。直ったのだぞ。我輩のせいではない。",
- "我輩の口ぐせが、また増えたのだ。『じゃじゃーん！』である。……ほれ、じゃじゃーん！ うむ、悪くない！",
- "この島は、日々こっそり更新されておるのだ。気づかぬうちに、ボンたちは少しずつ変わっておる。……そなたの観察眼に期待しておるぞ。"
+ "我輩はな、ボンたちの中で最年長である。威厳が違うであろう？ わっはっは！",
+ "ひょえボンの一人称が『ボン』になったのである。シリーズ最年少で、いちばん小さいのである。並ぶと身長差が見事である。",
+ "ボンたちの絵が、気分やしぐさで変わるようになったのである。素材を集めて渡した者がおるのである。感謝するがよい。",
+ "ボンたちが少し小さくなったのである。島が広く感じるのである。……狭いと文句を言っておったのは、実は誰かは言えぬがな。",
+ "しばらく、島が固まってしまった日があったのである。絵文字が、ぐるぐると増えてな……。直ったのである。我輩のせいではない。",
+ "我輩の口ぐせが、また増えたのである。『じゃじゃーん！』である。……ほれ、じゃじゃーん！ うむ、悪くない！",
+ "この島は、日々こっそり更新されておるのである。気づかぬうちに、ボンたちは少しずつ変わっておる。……そなたの観察眼に期待しておるぞ。"
 ];
 BREP.oko.bts=["ちょっと、アタシの名前の書き方、勝手に変えないでよね！ ……カタカナのほうが強そうだけど。","アタシは前から強いわよ。表記が変わっただけでしょ。","へえ、最年長ってあんたなの？ まあ、態度はそれっぽいわね。"];
 BREP.niko.bts=["にじボン、かっこいい名前〜☆ にこ、好きだよ！","ひょえちゃん、小さくてかわいくなったよね〜☆","みんなの変化に気づくの、にこ大好き〜！"];
@@ -5791,7 +5791,7 @@ const PATIMG={"oko": "data:image/webp;base64,UklGRuabAABXRUJQVlA4WAoAAAAQAAAANwE
   mogu:[["みんなでおにぎりつくりたいな〜…いい〜？",[["いいよ",{h:15,j:8,b:3,t:"わーい〜！"}],["あとでね",{j:-2,t:"うぅ〜…"}]]],["ここのお花、たべられるかな〜…",[["たべちゃだめ",{j:-1,b:1,t:"は〜い…"}],["きれいだから見るだけね",{j:3,b:2,t:"うん〜…きれい〜"}]]],["うち、まんぷくだから…ちょっとお昼寝してもいい〜？",[["おやすみ",{j:6,b:2,t:"ありがとう〜…むにゃ"}],["おさんぽしよう",{j:8,b:3,t:"いいね〜！"}]]]],
   nemu:[["…僕、ひなたぼっこしたい…",[["いいよ",{j:7,b:2,t:"…ありがと…"}],["いっしょにしよう",{j:10,b:4,t:"…うれしい…"}]]],["…むかし、ねてた場所…見に行ってもいい…？",[["いってらっしゃい",{j:6,b:2,t:"…ん…"}],["気をつけてね",{j:7,b:3,t:"…ありがと…"}]]],["…おなかすいた…けど、ねむい…どっち…",[["ごはんが先",{h:20,j:4,b:1,t:"…もぐ…"}],["ねむが先",{j:6,b:2,t:"…ふぁ…"}]]]],
   tere:[["あ、あの…きょう、ちゃんとできたこと…ほめて、もらえますか…？",[["えらいね",{j:10,b:4,t:"あ、ありがとうございますっ…！"}],["がんばったね",{j:9,b:3,t:"うれしいです…！"}]]],["お、お花をつんできたんです…かざってもいいですか…？",[["かざろう",{j:9,b:3,t:"よかった…！"}],["だれかにあげよう",{j:8,b:4,t:"は、はいっ…！"}]]],["あの…わたし、みんなと上手にお話しできてますか…？",[["できてるよ",{j:10,b:4,t:"…ほっとしました…"}],["少しずつでいいよ",{j:7,b:3,t:"はいっ…がんばります…"}]]]],
-  rain:[["お主、我輩の新しい決めポーズを見るがよい！",[["かっこいい！",{j:10,b:3,t:"じゃじゃーん！ 当然である！"}],["もう一回やって",{j:8,b:3,t:"よかろう！ わっはっは！"}]]],["今日の空の色について、一席ぶってもよいか？",[["聞かせて",{j:9,b:3,t:"うむ！ よく聞けい！"}],["短めでお願い",{j:5,b:2,t:"む…善処しよう。"}]]],["我輩、ちと小腹がすいたのだ。ペロペロキャンディ…いや、何でもよいぞ！",[["おやつにしよう",{h:15,j:8,b:3,t:"うむ！ 感謝するぞ！"}],["夕ごはんまで我慢",{j:-3,t:"むむ…やむを得ぬ。"}]]]]
+  rain:[["お主、我輩の新しい決めポーズを見るがよい！",[["かっこいい！",{j:10,b:3,t:"じゃじゃーん！ 当然である！"}],["もう一回やって",{j:8,b:3,t:"よかろう！ わっはっは！"}]]],["今日の空の色について、一席ぶってもよいか？",[["聞かせて",{j:9,b:3,t:"うむ！ よく聞けい！"}],["短めでお願い",{j:5,b:2,t:"む…善処しよう。"}]]],["我輩、ちと小腹がすいたのである。ペロペロキャンディ…いや、何でもよいぞ！",[["おやつにしよう",{h:15,j:8,b:3,t:"うむ！ 感謝するぞ！"}],["夕ごはんまで我慢",{j:-3,t:"むむ…やむを得ぬ。"}]]]]
  };
  Object.keys(MORE).forEach(k=>{if(ASKS[k])ASKS[k].push(...MORE[k])});
  const S_asks=[];let askAcc=0,askId=0;
@@ -5851,31 +5851,31 @@ const PATIMG={"oko": "data:image/webp;base64,UklGRuabAABXRUJQVlA4WAoAAAAQAAAANwE
 
  /* --- チュートリアル・ヒント・ガイド --- */
  try{TUT.length=0;TUT.push(
-  "はじめまして！ わたしは、この島のガイドのボンだよ。",
-  "ここは、人間の想像力から生まれた精霊――ボンたちの島。あなたは、島の管理人さん！",
-  "この島は、ボンたちを『見守る』島だよ。ごはんもあそびも、ボンたちが自分でやるから、ゆっくり眺めていてね。",
-  "ときどき、ボンが吹き出しで『おねがい』をしてくるよ。画面の下に出る選択肢から、返事を選んであげてね。",
-  "ボンを選ぶと『なでなで』ができるよ。立ち絵が大きくなるから、指でスライドしてなでてあげてね。",
-  "ボンは、さみしいと島を出ていっちゃうこともあるの。出ていく前には、サインを出すから、見のがさないでね。",
-  "画面の下の『ボンボンブック』には、にっき・てがみ・じっせき・ずかん・アルバムがあるよ。",
-  "それじゃあ、あとはおまかせ！ わからなくなったら、ブックの『ガイド』で、また会えるよ。")}catch(e){}
+  "うむ！ 我輩はにじボン。この島の案内役を務めておる。以後、見知りおくがよい！",
+  "ここは、人間の想像力から生まれた精霊――ボンたちの島である。そなたは、この島の管理人ではないか！",
+  "この島は、ボンたちを『見守る』島である。食事も遊びも、ボンたちが自ら営む。そなたは、ゆるりと眺めておればよい。",
+  "ときおり、ボンが吹き出しで『おねがい』を持ちかけてくる。画面の下に選択肢が出るゆえ、返事を選んでやるがよい。",
+  "ボンを選んで『なでなで』を押せば、立ち絵が大きく映る。指をすべらせて、撫でてやるがよい。",
+  "ボンは、さみしさが募れば島を去ることもある。出ていく前には必ず兆しが見える。見逃してはならぬぞ。",
+  "画面の下の『ボンボンブック』には、にっき・てがみ・じっせき・ずかん・アルバムが収められておる。",
+  "さて、あとは任せたぞ！ 迷ったなら、ブックの『ガイド』を開くがよい。我輩は、いつでもそこにおる！")}catch(e){}
  try{newGoal=function(){S.goal=null};renderGoal=function(){const el=document.getElementById("goal");if(el)el.hidden=true}}catch(e){}
  try{guideTip=function(){
   const tips=[];
   const hungry=S.rs.filter(r=>r.hunger<40),sad=S.rs.filter(r=>r.joy<40);
-  if(hungry.length)tips.push(CAST[hungry[0].id].name+"がおなかをすかせているみたい。ほかのボンが、そのうち気づいてくれるかも。");
-  if(sad.length)tips.push(CAST[sad[0].id].name+"が元気ないみたい。なでなでしてあげるといいかも。");
+  if(hungry.length)tips.push(CAST[hungry[0].id].name+"が腹を空かせておるようだ。ほかのボンが、そのうち気づくであろう。");
+  if(sad.length)tips.push(CAST[sad[0].id].name+"の元気がないようである。『なでなで』をしてやるがよい。");
   const w=Object.keys(S.warn||{});
-  if(w.length)tips.push(CAST[w[0]].name+"が、島を出ていきそうなそぶりを見せてるよ。なでなでや、おねがいへの返事で元気づけてあげて。");
-  tips.push("画面の下に出る『おねがい』には、ちゃんと返事をしてあげると、なかよし度が上がるよ。");
-  tips.push("ボンを選んで『なでなで』を押すと、立ち絵アップでなでられるよ。");
-  tips.push("なかよし度の上限は、日がたつにつれて広がっていくよ。いまの上限は"+bondCap()+"だよ。");
-  tips.push("ひょえボンは、管理人さんがそばにいると、少し勇気が出るんだって。");
-  tips.push("夜は、ひょえボンが一人だと、こわがっちゃうよ。");
-  tips.push("しばらく島をあけても大丈夫。帰ってきたら、留守のあいだのできごとを教えてあげるよ。");
+  if(w.length)tips.push(CAST[w[0]].name+"が、島を出ていきそうな素振りを見せておる。『なでなで』や、『おねがい』への返事で、元気づけてやるがよい。");
+  tips.push("画面の下に出る『おねがい』には、きちんと返事をしてやるがよい。なかよし度が上がるのである。");
+  tips.push("ボンを選んで『なでなで』を押せば、立ち絵がアップで映るぞ。");
+  tips.push("なかよし度の上限は、日が経つにつれて広がっていくのである。いまの上限は"+bondCap()+"だ。");
+  tips.push("ひょえボンは、管理人がそばにおると、少し勇気が出るらしい。");
+  tips.push("夜は、ひょえボンがひとりだと、怖がってしまうのである。");
+  tips.push("しばらく島を空けても案ずるな。戻れば、留守のあいだの出来事を、我輩が語って聞かせよう。");
   return pick(tips)}}catch(e){}
  {const o=guideHtml;guideHtml=function(){
-  return o.apply(this,arguments)+'<div class="soon" style="margin-top:10px;border-style:solid;font-size:13px;line-height:1.7"><b>🌴 見守りモードの遊び方</b><br>・ボンたちは、ごはんもあそびも自分でするよ<br>・ボンからの『おねがい』に返事をしてあげよう<br>・ボンを選んで『なでなで』で、立ち絵をスライド<br>・夜には、その日のできごとが『にっき』にたまるよ</div>'}}
+  return o.apply(this,arguments)+'<div class="soon" style="margin-top:10px;border-style:solid;font-size:13px;line-height:1.7"><b>🌴 見守りモードの心得</b><br>・ボンたちは、食事も遊びも自ら営むのである<br>・ボンからの『おねがい』には、返事をしてやるがよい<br>・ボンを選んで『なでなで』を押し、立ち絵をすべらせて撫でるのである<br>・夜には、その日の出来事が『にっき』に綴られるぞ</div>'}}
 
  /* --- 実績を見守り向けに --- */
  try{
@@ -5911,7 +5911,7 @@ const PATIMG={"oko": "data:image/webp;base64,UklGRuabAABXRUJQVlA4WAoAAAAQAAAANwE
   {a:"mogu",b:"nemu",e:"🍙",n:"もぐボンが、ねむボンの横でおにぎりを分けてあげていた。",fa:["ねむっち、はんぶんこ〜…どうぞ〜","おいしいよ〜…あ〜ん〜"],fb:["…ありがと…もぐ…","…おいしい…ふぁ…"],ja:5,jb:5},
   {a:"rain",b:"tere",e:"📜",n:"にじボンが、てれボンの書いた手紙を朗読して、てれボンが真っ赤になっていた。",fa:["よく聞けい！ これぞ名文である！","うむ！ 実に美しい手紙ではないか！"],fb:["や、やめてくださいぃ…！","は、はずかしいですっ…！"],ja:5,jb:-1},
   {a:"hyoe",b:"oko",e:"🛡️",n:"ひょえボンが雷におびえていると、おこボンが無言で隣に立ってくれた。",fa:["あわわ…おこさん、ありがとう…","おこさんがいると、こわくない…"],fb:["べ、別にあんたのためじゃないわよ！","…雷くらい、アタシが追い払ってあげるわ。"],ja:8,jb:3},
-  {a:"nemu",b:"rain",e:"🌙",n:"ねむボンが寝ているそばで、にじボンが小声で演説の練習をしていた。",fa:["…ぐぅ…","…むにゃ…"],fb:["むむ…静かに、静かにであるぞ……","しーっ…我輩の声は、小さくても威厳があるのだ。"],ja:2,jb:3},
+  {a:"nemu",b:"rain",e:"🌙",n:"ねむボンが寝ているそばで、にじボンが小声で演説の練習をしていた。",fa:["…ぐぅ…","…むにゃ…"],fb:["むむ…静かに、静かにであるぞ……","しーっ…我輩の声は、小さくても威厳があるのである。"],ja:2,jb:3},
   {a:"niko",b:"mogu",e:"🎈",n:"にこボンともぐボンが、貝がらを集めて宝探しごっこをしていた。",fa:["ねぇねぇ、宝物みつけた〜☆","つぎはどこにしよっか〜♪"],fb:["うち〜、おにぎりの形の貝がらみつけた〜","こっちにもありそう〜…ほりほり〜"],ja:6,jb:6},
   {a:"tere",b:"nemu",e:"🍃",n:"てれボンとねむボンが、木かげでならんでお昼寝していた。",fa:["あ、あの…おとなり、いいですか…？","…おやすみなさい…"],fb:["…ん…いいよ…","…ふぁ…あったかい…"],ja:5,jb:5},
   {a:"rain",b:"hyoe",e:"🌈",n:"にじボンがひょえボンに、小さな虹を見せてあげていた。",fa:["よく聞けい！ これが我輩の虹であるぞ！","怖がらずともよい、これは優しい虹である！"],fb:["わぁ…きれい…ボン、すき…","にじさん、すごい…！"],ja:6,jb:8}
@@ -5925,7 +5925,7 @@ const PATIMG={"oko": "data:image/webp;base64,UklGRuabAABXRUJQVlA4WAoAAAAQAAAANwE
   mogu:{rain:["雨の日は、おにぎりがおいしいね〜","ぬれても〜、へいき〜"],sunny:["ひなたで食べると、おいしいね〜"],night:["夜ごはん、まだかな〜…"],spring:["春はいちごがおいしいね〜"],summer:["夏は、すいかが食べたいな〜"],autumn:["秋は、くりごはんだね〜"],winter:["あったかいおにぎり〜、さいこう〜"]},
   nemu:{rain:["…雨の音…ねむくなる…","…ふぁ…ぬれても、いい…"],sunny:["…ひなた…きもちいい…"],night:["…ねる時間…"],spring:["…あったかい…ねむい…"],summer:["…あつくて…ねむい…"],autumn:["…ふとんの季節…ふぁ…"],winter:["…ぬくぬく…さいこう…"]},
   tere:{rain:["雨の音、ちょっと好きです…","か、傘…いっしょに入りますか…？"],sunny:["いい天気ですね…ほっとします…"],night:["お月さま、きれいです…"],spring:["お花を、つんでもいいですか…？"],summer:["海、すこしだけ入ってみたいです…"],autumn:["落ち葉で、しおりをつくりたいです…"],winter:["手が、つめたいです…"]},
-  rain:{rain:["雨とは、虹の前ぶれである！ うむ！","よく聞けい！ 雨のあとには、我輩の出番があるぞ！"],sunny:["晴れとは、我輩の舞台である！ わっはっは！"],night:["夜空に、虹はかからぬか…うむ、星でよい！"],spring:["春の虹は、やさしい色であるな。"],summer:["夏の虹は、堂々としておる！ 我輩のようにな！"],autumn:["秋の虹は、風情があるのう。"],winter:["冬の虹とは、めずらしいのだぞ！"]}
+  rain:{rain:["雨とは、虹の前ぶれである！ うむ！","よく聞けい！ 雨のあとには、我輩の出番があるぞ！"],sunny:["晴れとは、我輩の舞台である！ わっはっは！"],night:["夜空に、虹はかからぬか…うむ、星でよい！"],spring:["春の虹は、やさしい色であるな。"],summer:["夏の虹は、堂々としておる！ 我輩のようにな！"],autumn:["秋の虹は、風情があるのう。"],winter:["冬の虹とは、めずらしいのである！"]}
  };
  let wxAcc=0;
  setInterval(()=>{
@@ -6008,6 +6008,12 @@ const PRISM_SRC="data:audio/mpeg;base64,SUQzBAAAAAABClRYWFgAAAASAAADbWFqb3JfYnJh
  },500);
 })();
 
+
+/* v90: にじボンの立ち絵を現行(白髪)に差し替え */
+try{
+ IMG.rain=PATIMG.rain;IMG.guide=IMG.rain;POSE.rain=[PATIMG.rain];
+ const gi=document.getElementById("gimg");if(gi)gi.src=IMG.rain;
+}catch(e){}
 openTitle("main");
 setInterval(wander,4500);
 setInterval(()=>tick(),500);
