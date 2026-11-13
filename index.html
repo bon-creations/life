@@ -5,6 +5,12 @@
 <title>ボンボンライフ！</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#aadeff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ボンボン">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
 <style>
 /* Layout: one phone-width column. Island stage on top, selected resident card, then the event log. Sticker-style hard outlines to match the artwork. */
@@ -6005,3 +6011,5 @@ setInterval(wander,4500);
 setInterval(()=>tick(),500);
 setInterval(renderStage,1000);
 </script>
+
+<script>if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))</script>
