@@ -605,7 +605,7 @@ const SPECIAL={
  },
  "hyoe|oko":(add,k)=>{
   const h=R("hyoe"),o=R("oko"),x=Math.random();
-  if(x<.4){log("おこボンのひとことに、ひょえボンは「ボン！？」と飛び上がった。");add(-4);S.quarrel[k]=S.day;h.joy=clamp(h.joy-3);setX(h,"scared",3500);setX(o,"angry",3500);talkTo(o,"なによ、ビビりすぎ！",3500)}
+  if(x<.2&&Object.keys(S.quarrel).length<1){log("おこボンのひとことに、ひょえボンは「ボン！？」と飛び上がった。");add(-4);S.quarrel[k]=S.day;h.joy=clamp(h.joy-3);setX(h,"scared",3500);setX(o,"angry",3500);talkTo(o,"なによ、ビビりすぎ！",3500)}
   else if(x<.7){log("おこボンが「…ごめん、おどかすつもりじゃなかったの」とそっと言った。ひょえボンは「ボンも、びっくりしすぎた…」と答えた。");add(8);o.joy=clamp(o.joy+5);h.joy=clamp(h.joy+8);setX(o,"normal",3500);setX(h,"happy",4000)}
   else{log("ひょえボンは、おこボンをこわがりながらも、そっとおにぎりを半分わけた。おこボンは「…ありがと」と受け取った。");add(6);o.joy=clamp(o.joy+8);setX(o,"happy",4000);setX(h,"normal",3500)}
  },
@@ -672,7 +672,7 @@ function pairEvent(){
   return;
  }
  if(roll<.5){add(rnd(7,12));log(pick(POS)(A,B));happy2()}
- else if(roll<.66){add(-10);S.quarrel[k]=S.day;log(pick(NEG)(A,B));setX(a,upsetOf(a.id));setX(b,upsetOf(b.id));talkTo(a,pick(CAST[a.id].bad))}
+ else if(roll<.54&&Object.keys(S.quarrel).length<1){add(-10);S.quarrel[k]=S.day;log(pick(NEG)(A,B));setX(a,upsetOf(a.id));setX(b,upsetOf(b.id));talkTo(a,pick(CAST[a.id].bad))}
  else if(a.id==="mogu"||b.id==="mogu"){const m=a.id==="mogu"?a:b,o=m===a?b:a;log("もぐボンが"+CAST[o.id].name+"のごはんをつまみ食いした。");setX(m,"eat");add(-3)}
  else{log(pick(NEU)(A,B))}
 }
@@ -693,14 +693,14 @@ function talkEvent(){
  const kind=S.bonds[k]||"";
  const key=pick(Object.keys(TALK_TOPICS)),tp=TALK_TOPICS[key];
  const topic=pick(tp.t);
- const p=0.5+Math.max(-.25,Math.min(.3,rel/200))+(kind==="best"?.2:kind==="rival"?-.15:0)+affinity(a.id,b.id)*.1;
+ const p=0.75+Math.max(-.25,Math.min(.3,rel/200))+(kind==="best"?.2:kind==="rival"?-.15:0)+affinity(a.id,b.id)*.1;
  const ok=Math.random()<p,d=Math.round(rnd(4,9));
  talkTo(a,nickOf(a.id,b.id)+"、"+topic+"のことなんだけど…",3200);
  setTimeout(()=>{try{talkTo(b,ok?pick(CAST[b.id].idle):pick(["そうかなぁ…","うーん、ちがうと思う","もういいよ…"]),3200)}catch(e){}},1800);
  log(A+"と"+B+"は"+topic+"について話した。"+pick(ok?tp.good:tp.bad)+"。（"+(ok?"+":"-")+d+"）");
  S.rel[k]=Math.max(-60,Math.min(100,rel+(ok?d:-d)));
  if(ok){setX(a,"happy",3500);setX(b,"happy",3500)}
- else{S.quarrel[k]=S.day;setX(a,upsetOf(a.id),3500);setX(b,upsetOf(b.id),3500)}
+ else{if(Math.random()<.35&&Object.keys(S.quarrel).length<1)S.quarrel[k]=S.day;setX(a,upsetOf(a.id),3500);setX(b,upsetOf(b.id),3500)}
  return true;
 }
 /* ---------- leaving, hiding and coming back ---------- */
@@ -3006,7 +3006,7 @@ RAIN_BACK[0][1].push("我輩は、なぜか柿が大好きである。…理由�
  const ok=R("oko"),mg=R("mogu");
  if(ok&&mg&&!ok.sleep&&!mg.sleep&&mg.hunger>=95){
   const k=pk("oko","mogu");
-  if(S.quarrel[k]==null&&Math.random()<.25){
+  if(S.quarrel[k]==null&&Object.keys(S.quarrel).length<1&&Math.random()<.1){
    S.quarrel[k]=S.day;S.rel[k]=(S.rel[k]||0)-6;
    ok.joy=clamp(ok.joy-5);setX(ok,"angry",4000);setX(mg,"down",4000);
    talkTo(ok,"食べすぎよ！ また太るわよ！",3800);talkTo(mg,"もぐ…まだ入るよ〜…",3800);
@@ -3122,10 +3122,11 @@ EVT.push({ok:()=>S.rs.some(r=>r.bond>=50),run:()=>{
  o();
  if(G||titleOpen||S.day<3||!S.rs.length)return;
  const last=S._evDay||0;
- if(S.day-last<2)return;
+ if(S.day-last<1)return;
+ if(S.day-last<2&&Math.random()<.45)return;
  const ok=EVT.filter(e=>{try{return e.ok()}catch(x){return false}});
- const e=pick(ok);if(!e)return;
- S._evDay=S.day;
+ const pool=ok.filter(x=>x!==EVT[S._evLast|0]),e=pick(pool.length?pool:ok);if(!e)return;
+ S._evLast=EVT.indexOf(e);S._evDay=S.day;
  setTimeout(()=>{try{e.run()}catch(x){}},900);
 }}
 /* lost item found next day */
@@ -6032,6 +6033,91 @@ try{
   keep.forEach(([im,id])=>{im.dataset.bid=id})
  }}
 }catch(e){}
+
+/* ================= v92: 介入イベントを増やす ================= */
+{
+ const nm=id=>CAST[id].name,has=id=>!!R(id),pairKey=(a,b)=>pk(a,b);
+ const eachJoy=(n)=>S.rs.forEach(r=>{r.joy=clamp(r.joy+n)});
+ const E=(ok,run)=>EVT.push({ok,run});
+ E(()=>S.rs.length>0,()=>askBox("🌠 夜空に、大きな流れ星が走った！ ボンたちが願いごとをしているよ。何を願うかな？",[
+  {l:"💞 みんなが仲よくなりますように",f:()=>{allJoy(6,3);log("🌠 流れ星に、みんなで仲よくなれますようにと願った。");album("🌠","みんなで流れ星に願いごとをした。")}},
+  {l:"🍙 おいしいものが食べられますように",f:()=>{S.rs.forEach(r=>{r.hunger=clamp(r.hunger+18);r.joy=clamp(r.joy+6)});log("🌠 流れ星に、おいしいものをお願いしたら、おなかが鳴った。")}},
+  {l:"🤫 そっと見守る",f:()=>{allJoy(3,1);log("🌠 ボンたちは、それぞれ静かに願いごとをした。")}}]));
+ E(()=>S.rs.length>0,()=>{const r=pick(S.rs),n=nm(r.id);
+  askBox("🐦 ちいさな小鳥が、"+n+"の肩にとまった。羽をけがしているみたい…",[
+  {l:"🩹 手当てしてあげる",f:()=>{r.joy=clamp(r.joy+16);r.bond=clamp(r.bond+6);setX(r,"happy",5000);log("🐦 "+n+"と小鳥の手当てをした。やがて元気に飛び立っていった。");album("🐦",n+"と小鳥を助けた。")}},
+  {l:"🪹 巣をつくってあげる",f:()=>{allJoy(8,2);log("🐦 みんなで小鳥の巣をつくった。島に新しい住人が増えた気分。")}},
+  {l:"👀 そっと見守る",f:()=>{r.joy=clamp(r.joy+5);log("🐦 小鳥は、少し休んでから自分で飛んでいった。")}}])});
+ E(()=>true,()=>askBox("🍾 浜辺に、手紙の入った瓶が流れ着いた！ どうする？",[
+  {l:"📜 みんなで読む",f:()=>{allJoy(8,2);log("🍾 瓶の手紙には「どこかの誰かへ。元気ですか？」と書いてあった。みんな胸があたたかくなった。");album("🍾","浜辺で手紙入りの瓶を見つけた。")}},
+  {l:"✍️ 返事を書いて流す",f:()=>{allJoy(10,3);log("🍾 みんなで返事を書いて、海へ流した。いつか届くといいな。");album("✍️","瓶の手紙に返事を書いて流した。")}},
+  {l:"📦 宝物としてとっておく",f:()=>{allJoy(4,1);log("🍾 瓶は、島の宝物になった。")}}]));
+ E(()=>true,()=>askBox("🌈 雨あがりの空に、大きな虹がかかった！",[
+  {l:"🏃 みんなで虹の下まで走る",f:()=>{S.rs.forEach(r=>{r.hunger=clamp(r.hunger-6)});allJoy(12,3);log("🌈 みんなで虹に向かって走った。");album("🌈","みんなで虹を追いかけた。")}},
+  {l:"🧺 ピクニックにする",f:()=>{S.rs.forEach(r=>{r.hunger=clamp(r.hunger+20);r.joy=clamp(r.joy+8)});log("🌈 虹の下でピクニック。おにぎりがおいしい！");album("🌈","虹の下でピクニックをした。")}},
+  {l:"🎨 ゆっくり眺める",f:()=>{allJoy(7,2);log("🌈 虹が消えるまで、みんなで静かに眺めた。")}}]));
+ E(()=>has("nemu"),()=>{const r=R("nemu");
+  askBox("😴 ぽかぽかのお昼どき。ねむボンがうとうとしている。",[
+  {l:"🛏️ いっしょにお昼寝する",f:()=>{r.joy=clamp(r.joy+16);r.bond=clamp(r.bond+7);setX(r,"happy",5000);talkTo(r,"…いっしょ、うれしい…",4000);log("😴 ねむボンと並んで、ぐっすりお昼寝した。");album("😴","ねむボンとお昼寝した。")}},
+  {l:"🧣 ブランケットをかけてあげる",f:()=>{r.joy=clamp(r.joy+10);r.bond=clamp(r.bond+4);log("😴 そっとブランケットをかけてあげた。")}},
+  {l:"🔔 起こして散歩にさそう",f:()=>{r.joy=clamp(r.joy-8);setX(r,"down",4000);talkTo(r,"…ふぁ…ねむい…",3500);log("😴 起こしてしまった。ねむボンは、ちょっと不機嫌。")}}])});
+ E(()=>has("mogu"),()=>{const r=R("mogu");
+  askBox("🥕 もぐボンの畑で、野菜がたくさん実った！",[
+  {l:"🍲 みんなで収穫祭のごはん",f:()=>{S.rs.forEach(x=>{x.hunger=clamp(x.hunger+28);x.joy=clamp(x.joy+8)});r.bond=clamp(r.bond+6);log("🥕 みんなで収穫祭。もぐボンの料理は、やっぱり最高！");album("🥕","もぐボンの畑で収穫祭をした。")}},
+  {l:"🧺 お隣さんにおすそわけ",f:()=>{allJoy(5,2);r.joy=clamp(r.joy+10);log("🥕 野菜を島のみんなにおすそわけした。")}},
+  {l:"🌱 次の種をまく",f:()=>{r.joy=clamp(r.joy+12);r.bond=clamp(r.bond+4);talkTo(r,"またたくさん、育つよ〜！",3500);log("🥕 もぐボンと、次の種をまいた。")}}])});
+ E(()=>S.rs.some(r=>r.joy<45),()=>{const r=S.rs.filter(x=>x.joy<45).sort((a,b)=>a.joy-b.joy)[0],n=nm(r.id);
+  askBox("☁️ "+n+"が、すみっこでしょんぼりしている。",[
+  {l:"🤗 そばにすわる",f:()=>{r.joy=clamp(r.joy+20);r.bond=clamp(r.bond+6);setX(r,"happy",5000);log("☁️ "+n+"のそばに、だまってすわった。");album("☁️",n+"のそばにすわった。")}},
+  {l:"🎈 みんなで遊びにさそう",f:()=>{r.joy=clamp(r.joy+18);S.rs.forEach(x=>{if(x!==r)x.joy=clamp(x.joy+4)});log("☁️ みんなで"+n+"を遊びにさそった。")}},
+  {l:"🕊️ ひとりにしてあげる",f:()=>{r.joy=clamp(r.joy+8);log("☁️ "+n+"は、ひとりで少し気持ちを整理した。")}}])});
+ E(()=>has("oko")&&has("mogu"),()=>{const o=R("oko"),m=R("mogu"),k=pairKey("oko","mogu");
+  askBox("🍙 おにぎりが1個だけ余った！ おこボンももぐボンも、じっと見ている…",[
+  {l:"✂️ 半分こにする",f:()=>{S.rel[k]=Math.min(100,(S.rel[k]||0)+8);o.joy=clamp(o.joy+8);m.joy=clamp(m.joy+10);log("🍙 おにぎりは仲よく半分こになった。")}},
+  {l:"🎲 じゃんけんで決める",f:()=>{const w=Math.random()<.5?o:m,l=w===o?m:o;w.joy=clamp(w.joy+16);l.joy=clamp(l.joy-4);setX(w,"happy",4000);setX(l,upsetOf(l.id),4000);S.rel[k]=(S.rel[k]||0)+2;log("🍙 じゃんけんの結果、"+nm(w.id)+"が勝った！")}},
+  {l:"🍚 もう1個にぎってあげる",f:()=>{o.joy=clamp(o.joy+12);m.joy=clamp(m.joy+12);m.hunger=clamp(m.hunger+15);o.hunger=clamp(o.hunger+15);log("🍙 もう1個にぎって、2人とも大満足。")}}])});
+ E(()=>has("hyoe"),()=>{const r=R("hyoe");
+  askBox("🌑 夜がふけて、ひょえボンが布団の中でふるえている。",[
+  {l:"🕯️ ランタンをともす",f:()=>{r.joy=clamp(r.joy+14);r.bond=clamp(r.bond+5);talkTo(r,"あったかい…",3500);log("🌑 ランタンの灯りで、ひょえボンは安心した。")}},
+  {l:"🛏️ 近くでいっしょに寝る",f:()=>{r.joy=clamp(r.joy+18);r.bond=clamp(r.bond+8);setX(r,"happy",5000);log("🌑 ひょえボンのそばで、朝まで見守った。");album("🌑","ひょえボンのそばで夜を過ごした。")}},
+  {l:"💪 がんばれ、と励ます",f:()=>{r.joy=clamp(r.joy+4);r.bond=clamp(r.bond+2);log("🌑 ひょえボンは「…うん、がんばる」とうなずいた。")}}])});
+ E(()=>{try{return S.rs.some((a,i)=>S.rs.some((b,j)=>j>i&&(S.rel[pairKey(a.id,b.id)]||0)<8))}catch(e){return false}},()=>{
+  let ps=[];S.rs.forEach((a,i)=>S.rs.forEach((b,j)=>{if(j>i&&(S.rel[pairKey(a.id,b.id)]||0)<8)ps.push([a,b])}));
+  const [a,b]=pick(ps),k=pairKey(a.id,b.id),A=nm(a.id),B=nm(b.id);
+  askBox("🤝 "+A+"と"+B+"は、まだちょっとぎこちない。どうしよう？",[
+  {l:"🍡 いっしょにおやつを食べさせる",f:()=>{S.rel[k]=Math.min(100,(S.rel[k]||0)+12);a.joy=clamp(a.joy+8);b.joy=clamp(b.joy+8);log("🤝 "+A+"と"+B+"は、おやつを分け合って少し仲よくなった。")}},
+  {l:"🧹 ふたりにお使いをたのむ",f:()=>{S.rel[k]=Math.min(100,(S.rel[k]||0)+10);a.joy=clamp(a.joy+6);b.joy=clamp(b.joy+6);log("🤝 "+A+"と"+B+"は、いっしょにお使いへ出かけた。")}},
+  {l:"👀 自然にまかせる",f:()=>{S.rel[k]=Math.min(100,(S.rel[k]||0)+3);log("🤝 "+A+"と"+B+"のことは、そっと見守ることにした。")}}])});
+ E(()=>season()===0,()=>askBox("🌸 桜が満開！ ボンたちが、木の下でそわそわしている。",[
+  {l:"🍡 お花見をする",f:()=>{S.rs.forEach(r=>{r.hunger=clamp(r.hunger+18);r.joy=clamp(r.joy+10)});log("🌸 桜の下でお花見。花びらがひらひら舞っている。");album("🌸","みんなでお花見をした。")}},
+  {l:"📷 記念写真をとる",f:()=>{allJoy(9,4);log("🌸 桜の木の下で、みんなで記念写真をとった。");album("📷","桜の下で記念写真をとった。")}},
+  {l:"😌 ひとり占めせず見守る",f:()=>{allJoy(5,1);log("🌸 ボンたちは、思い思いに桜を楽しんでいる。")}}]));
+ E(()=>season()===1,()=>askBox("🍉 暑い日が続いている。ボンたちがぐったりしている…",[
+  {l:"🏊 池で水遊びをする",f:()=>{allJoy(12,3);log("🍉 池でばしゃばしゃ水遊び。みんな大はしゃぎ！");album("🏊","みんなで池で水遊びをした。")}},
+  {l:"🍉 スイカ割りをする",f:()=>{S.rs.forEach(r=>{r.hunger=clamp(r.hunger+15);r.joy=clamp(r.joy+10)});log("🍉 スイカ割りは、ぱかんと大成功！");album("🍉","みんなでスイカ割りをした。")}},
+  {l:"🧊 日かげで休ませる",f:()=>{allJoy(4,1);log("🍉 木かげで、ゆっくり涼んだ。")}}]));
+ E(()=>season()===2,()=>askBox("🍂 落ち葉がたくさん積もった！",[
+  {l:"🍠 焼きいもをする",f:()=>{S.rs.forEach(r=>{r.hunger=clamp(r.hunger+24);r.joy=clamp(r.joy+9)});log("🍂 落ち葉で焼きいもを作った。ほくほく！");album("🍠","落ち葉で焼きいもをした。")}},
+  {l:"🍁 落ち葉の山にダイブ",f:()=>{allJoy(11,3);log("🍂 落ち葉の山にみんなでダイブ！");album("🍁","落ち葉の山で遊んだ。")}},
+  {l:"🧹 きれいに掃く",f:()=>{allJoy(3,1);log("🍂 落ち葉を掃いて、島がすっきりした。")}}]));
+ E(()=>S.rs.some(r=>r.bond>=40),()=>{const r=pick(S.rs.filter(x=>x.bond>=40)),n=nm(r.id);
+  askBox("🎁 "+n+"が、後ろ手に何かかくしてもじもじしている。「あの…これ…」",[
+  {l:"🎀 よろこんで受け取る",f:()=>{r.joy=clamp(r.joy+18);r.bond=clamp(r.bond+7);setX(r,"happy",5000);talkTo(r,"よろこんでくれて、うれしい！",4000);log("🎁 "+n+"から、手作りの贈り物をもらった。");album("🎁",n+"から手作りの贈り物をもらった。")}},
+  {l:"💬 「ありがとう」と言って飾る",f:()=>{r.joy=clamp(r.joy+14);r.bond=clamp(r.bond+9);log("🎁 贈り物は、島の見えるところに飾った。")}}])});
+ E(()=>S.rs.length>=2,()=>askBox("🔭 丘の上に、望遠鏡が置かれているのをボンたちが見つけた。",[
+  {l:"🌌 みんなで星をのぞく",f:()=>{allJoy(9,3);log("🔭 望遠鏡で見た星は、いつもよりずっと近かった。");album("🔭","みんなで望遠鏡をのぞいた。")}},
+  {l:"🏝️ 遠くの島をさがす",f:()=>{allJoy(6,2);log("🔭 遠くに、ちいさな島影が見えた気がする。")}},
+  {l:"📦 しまっておく",f:()=>{allJoy(1,0);log("🔭 望遠鏡は、倉庫にしまわれた。")}}]));
+ E(()=>S.rs.length>=3,()=>askBox("🎲 ボンたちが「みんなで遊びたい！」と言っている。何をする？",[
+  {l:"🎭 かくれんぼ",f:()=>{allJoy(10,3);log("🎲 かくれんぼ。てれボンは、ぜんぜん見つからなかった。");album("🎲","みんなでかくれんぼをした。")}},
+  {l:"🪁 かけっこ",f:()=>{S.rs.forEach(r=>{r.hunger=clamp(r.hunger-8)});allJoy(12,3);log("🎲 全員でかけっこ！ 1位は誰かな。");album("🏃","みんなでかけっこをした。")}},
+  {l:"🧩 おえかき大会",f:()=>{allJoy(9,4);log("🎲 みんなで絵をかいた。個性があふれている。");album("🎨","みんなでおえかき大会をした。")}}]));
+ E(()=>S.rs.length>0,()=>{const r=pick(S.rs),n=nm(r.id);
+  askBox("🌊 "+n+"が、波打ちぎわできれいな貝がらを見つけた。",[
+  {l:"🐚 耳にあてて音を聞く",f:()=>{r.joy=clamp(r.joy+14);r.bond=clamp(r.bond+4);log("🌊 貝がらから、遠い海の音が聞こえた。")}},
+  {l:"🎁 だれかにプレゼントする",f:()=>{const o=pick(S.rs.filter(x=>x!==r));if(o){o.joy=clamp(o.joy+14);r.joy=clamp(r.joy+10);S.rel[pairKey(r.id,o.id)]=Math.min(100,(S.rel[pairKey(r.id,o.id)]||0)+8);log("🌊 "+n+"は貝がらを"+nm(o.id)+"にプレゼントした。")}else{r.joy=clamp(r.joy+10)}}},
+  {l:"✨ 島の飾りにする",f:()=>{allJoy(4,1);log("🌊 貝がらは、島のはしに飾られた。")}}])});
+}
 openTitle("main");
 setInterval(wander,4500);
 setInterval(()=>tick(),500);
