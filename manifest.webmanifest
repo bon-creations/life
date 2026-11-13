@@ -1,2 +1,2 @@
-{"name":"ボンボンライフ！","short_name":"ボンボン","description":"ボンたちの島を見守るゲーム","start_url":"./index.html","scope":"./","display":"standalone","orientation":"any","background_color":"#aadeff","theme_color":"#aadeff","lang":"ja",
+{"name":"ボンボンライフ！","short_name":"ボンボンライフ！","description":"ボンたちの島を見守るゲーム","start_url":"./index.html","scope":"./","display":"standalone","orientation":"any","background_color":"#aadeff","theme_color":"#aadeff","lang":"ja",
 "icons":[{"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png"},{"src":"icons/icon-maskable-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]}
